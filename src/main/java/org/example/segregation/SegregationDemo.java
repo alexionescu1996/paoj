@@ -1,20 +1,20 @@
 package org.example.segregation;
 
 /**
- * Interface Segregation: split one broad interface into focused contracts.
- * A class implements only what it actually needs.
+ * Interface Segregation: a hero implements only the powers it actually has.
+ * Falcon can fly but not shoot. Iron Man can do both.
  */
 public class SegregationDemo {
 
     public static void run() {
-        System.out.println("=== Segregation: focused interface contracts ===");
+        System.out.println("=== Segregation: heroes implement only their powers ===");
 
-        Multiplier multiplier = new Multiplier();
-        System.out.println("Multiplier: 5 * 3 = " + multiplier.multiply(5, 3));
+        Falcon falcon = new Falcon();
+        falcon.fly(3000);
 
-        Calculator calculator = new Calculator();
-        System.out.println("Calculator: 10 * 4 = " + calculator.multiply(10, 4));
-        System.out.println("Calculator: 10 / 4 = " + calculator.divide(10, 4));
+        IronMan ironMan = new IronMan();
+        ironMan.fly(10000);
+        ironMan.shoot(95);
         System.out.println();
     }
 }

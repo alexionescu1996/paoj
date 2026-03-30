@@ -4,23 +4,22 @@ public class BasicDemo {
 
     public static void run() {
         System.out.println("=== Basics: interface declaration and anonymous class ===");
+        System.out.println("Motto: " + SuperPower.HERO_MOTTO);
 
-        MathOperation mathOperation = new MathOperation() {
+        SuperPower superPower = new SuperPower() {
             @Override
-            public void multiply(int a, int b) {
-                System.out.println(a + " * " + b + " = " + (a * b));
+            public void activate(String target) {
+                System.out.println("Laser beam fired at " + target + "! Power: " + powerLevel());
             }
 
             @Override
-            public double divide(int a, int b) {
-                return (double) a / b;
+            public int powerLevel() {
+                return 85;
             }
         };
 
-        mathOperation.multiply(2, 4);
-        mathOperation.multiply(7, 10);
-        System.out.println("7 / 10 = " + mathOperation.divide(7, 10));
-        System.out.println("PI = " + MathOperation.PI);
+        superPower.activate("Thanos");
+        superPower.activate("Loki");
         System.out.println();
     }
 }

@@ -5,28 +5,40 @@ public class FunctionalDemo {
     public static void run() {
         System.out.println("=== Functional: @FunctionalInterface, lambdas, method references ===");
 
-        // Lambda expression
-        MathMultiply multiply = (a, b) -> (double) a * b;
-        MathDivide divide = (a, b) -> (double) a / b;
+        // Lambda — concise way to implement a single-method interface
+        PowerActivator blast = (power, armor) -> power * 1.0 - armor * 0.5;
+        System.out.println("Repulsor blast damage: " + blast.activate(90, 30));
 
-        System.out.println("Lambda multiply: 6 * 7 = " + multiply.multiply(6, 7));
-        System.out.println("Lambda divide:  10 / 3 = " + divide.divide(10, 3));
+        // Another lambda — different power
+        PowerActivator lightning = (power, armor) -> Math.pow(power, 1.2) - armor;
+        System.out.println("Lightning strike damage: " + lightning.activate(70, 20));
 
-        // Method reference
-        MathMultiply multiplyRef = Math::multiplyExact;
-        System.out.println("Method ref:     6 * 7 = " + multiplyRef.multiply(6, 7));
+        // HealingFactor via lambda
+        HealingFactor wolverine = (base, bonus) -> base + bonus * 2.5;
+        System.out.println("Wolverine heals to: " + wolverine.heal(50, 20));
 
-        // MathOperation has 3 abstract methods — needs anonymous class
-        MathOperation calculator = new MathOperation() {
+        // Method reference — even shorter
+        HealingFactor hyperbaricHeal = Math::max;
+        System.out.println("Hyperbaric heal result: " + hyperbaricHeal.heal(60, 80));
+
+        // Superhero has 3 abstract methods — cannot use a lambda, needs anonymous class
+        Superhero thor = new Superhero() {
             @Override
-            public double multiply(int a, int b) { return (double) a * b; }
+            public String heroName() { return "Thor"; }
+
             @Override
-            public double divide(int a, int b) { return (double) a / b; }
+            public double activate(int powerLevel, int targetArmor) {
+                return Math.pow(powerLevel, 1.5) - targetArmor;
+            }
+
             @Override
-            public double applyFunction(int a, int b) { return Math.pow(a, b); }
+            public double heal(int baseHealth, int bonus) {
+                return baseHealth + bonus;
+            }
         };
 
-        System.out.println("MathOperation pow: 2 ^ 10 = " + calculator.applyFunction(2, 10));
+        System.out.println(thor.heroName() + " strikes for: " + thor.activate(100, 10));
+        System.out.println(thor.heroName() + " heals to: " + thor.heal(30, 70));
         System.out.println();
     }
 }
