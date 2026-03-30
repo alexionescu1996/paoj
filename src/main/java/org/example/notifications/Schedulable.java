@@ -1,5 +1,5 @@
 package org.example.notifications;
 
-public interface Schedulable {
+interface Schedulable {
     void schedule();
 }

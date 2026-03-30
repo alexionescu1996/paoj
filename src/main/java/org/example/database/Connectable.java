@@ -1,5 +1,5 @@
 package org.example.database;
 
-public interface Connectable {
+interface Connectable {
     void connect();
 }

@@ -1,5 +1,5 @@
 package org.example.music;
 
-public interface Shuffleable {
+interface Shuffleable {
     void shuffle();
 }

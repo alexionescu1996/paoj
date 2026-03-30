@@ -1,5 +1,5 @@
 package org.example.streaming;
 
-public interface Watchable {
+interface Watchable {
     void watch();
 }

@@ -1,5 +1,5 @@
 package org.example.notifications;
 
-public interface Sendable {
+interface Sendable {
     void send();
 }

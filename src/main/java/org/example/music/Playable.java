@@ -1,5 +1,5 @@
 package org.example.music;
 
-public interface Playable {
+interface Playable {
     void play();
 }

@@ -1,6 +1,5 @@
 package org.example.database;
 
-// Separate interface — like Mortal
-public interface Cacheable {
+interface Cacheable {
     void cache();
 }

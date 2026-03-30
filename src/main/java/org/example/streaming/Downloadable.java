@@ -1,5 +1,5 @@
 package org.example.streaming;
 
-public interface Downloadable {
+interface Downloadable {
     void download();
 }

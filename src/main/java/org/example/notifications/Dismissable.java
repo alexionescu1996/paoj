@@ -1,5 +1,5 @@
 package org.example.notifications;
 
-public interface Dismissable {
+interface Dismissable {
     void dismiss();
 }

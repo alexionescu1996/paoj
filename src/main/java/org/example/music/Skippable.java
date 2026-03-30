@@ -1,5 +1,5 @@
 package org.example.music;
 
-public interface Skippable {
+interface Skippable {
     void skip();
 }

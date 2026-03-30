@@ -1,17 +1,10 @@
 package org.example.notifications;
 
-// Implements multiple interfaces — like Erou
-public class PushNotification implements Sendable, Schedulable, Dismissable {
+class PushNotification implements Sendable, Dismissable, Schedulable {
 
-    public void send() {
-        System.out.println("Sending push notification to device...");
-    }
+    public void send() {}
 
-    public void schedule() {
-        System.out.println("Scheduling notification for later...");
-    }
+    public void dismiss() {}
 
-    public void dismiss() {
-        System.out.println("Dismissing notification...");
-    }
+    public void schedule() {}
 }
