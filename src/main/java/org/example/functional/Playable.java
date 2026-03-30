@@ -5,6 +5,6 @@ package org.example.functional;
  * Can be instantiated with a lambda expression.
  */
 @FunctionalInterface
-public interface PowerActivator {
-    double activate(int powerLevel, int targetArmor);
+public interface Playable {
+    void play(String trackTitle);
 }

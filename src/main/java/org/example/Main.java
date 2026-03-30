@@ -2,9 +2,9 @@ package org.example;
 
 import org.example.basics.BasicDemo;
 import org.example.functional.FunctionalDemo;
-import org.example.hero.impl.IronMan;
 import org.example.inheritance.InheritanceDemo;
 import org.example.segregation.SegregationDemo;
+import org.example.streaming.impl.StreamPlayer;
 
 public class Main {
 
@@ -15,10 +15,12 @@ public class Main {
         InheritanceDemo.run();
         FunctionalDemo.run();
 
-        // Final result: top-level hero interfaces with IronMan
-        System.out.println("=== Final: top-level hero interfaces ===");
-        IronMan ironMan = new IronMan();
-        ironMan.fly(15000);
-        ironMan.shoot(98);
+        // Final result: top-level streaming interfaces with StreamPlayer
+        System.out.println("=== Final: top-level streaming interfaces ===");
+        StreamPlayer player = new StreamPlayer();
+        player.play("Stairway to Heaven");
+        System.out.println("Matches 'rock'? " + player.matches("rock"));
+        System.out.println("Recommendation for 'hype': " + player.recommend("hype"));
+        System.out.println("Recommendation for 'focus': " + player.recommend("focus"));
     }
 }

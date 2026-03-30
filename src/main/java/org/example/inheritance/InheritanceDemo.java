@@ -3,12 +3,13 @@ package org.example.inheritance;
 public class InheritanceDemo {
 
     public static void run() {
-        System.out.println("=== Inheritance: Superhero extends Flyable + Shootable ===");
+        System.out.println("=== Inheritance: GameCharacter extends Attackable + Healable + Movable ===");
 
-        IronMan ironMan = new IronMan();
-        System.out.println("Hero: " + ironMan.heroName());
-        ironMan.fly(12000);
-        ironMan.shoot(90);
+        Warrior warrior = new Warrior();
+        System.out.println("Playing as: " + warrior.characterName());
+        warrior.move("north", 5);
+        warrior.attack(60);
+        warrior.heal(25);
         System.out.println();
     }
 }

@@ -4,22 +4,23 @@ public class BasicDemo {
 
     public static void run() {
         System.out.println("=== Basics: interface declaration and anonymous class ===");
-        System.out.println("Motto: " + SuperPower.HERO_MOTTO);
+        System.out.println("Max level: " + Character.MAX_LEVEL);
+        System.out.println("Spawn point: " + Character.DEFAULT_SPAWN);
 
-        SuperPower superPower = new SuperPower() {
+        Character rogue = new Character() {
             @Override
-            public void activate(String target) {
-                System.out.println("Laser beam fired at " + target + "! Power: " + powerLevel());
+            public void attack(String target) {
+                System.out.println("Rogue backstabs " + target + " for " + (level() * 4) + " damage!");
             }
 
             @Override
-            public int powerLevel() {
-                return 85;
+            public int level() {
+                return 12;
             }
         };
 
-        superPower.activate("Thanos");
-        superPower.activate("Loki");
+        rogue.attack("Goblin");
+        rogue.attack("Cave Troll");
         System.out.println();
     }
 }

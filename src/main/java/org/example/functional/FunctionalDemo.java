@@ -5,40 +5,45 @@ public class FunctionalDemo {
     public static void run() {
         System.out.println("=== Functional: @FunctionalInterface, lambdas, method references ===");
 
-        // Lambda — concise way to implement a single-method interface
-        PowerActivator blast = (power, armor) -> power * 1.0 - armor * 0.5;
-        System.out.println("Repulsor blast damage: " + blast.activate(90, 30));
+        // Lambda — one line replaces an entire anonymous class
+        Playable speaker = track -> System.out.println("Now playing: " + track);
+        speaker.play("Bohemian Rhapsody");
+        speaker.play("Blinding Lights");
 
-        // Another lambda — different power
-        PowerActivator lightning = (power, armor) -> Math.pow(power, 1.2) - armor;
-        System.out.println("Lightning strike damage: " + lightning.activate(70, 20));
+        // Another lambda — different behaviour, same interface
+        Playable shuffle = track -> System.out.println("Shuffled to: " + track.toUpperCase());
+        shuffle.play("Hotel California");
 
-        // HealingFactor via lambda
-        HealingFactor wolverine = (base, bonus) -> base + bonus * 2.5;
-        System.out.println("Wolverine heals to: " + wolverine.heal(50, 20));
+        // Filterable via lambda
+        Filterable onlyRock = genre -> genre.equalsIgnoreCase("rock");
+        System.out.println("Is 'rock' a match? " + onlyRock.matches("rock"));
+        System.out.println("Is 'pop' a match?  " + onlyRock.matches("pop"));
 
-        // Method reference — even shorter
-        HealingFactor hyperbaricHeal = Math::max;
-        System.out.println("Hyperbaric heal result: " + hyperbaricHeal.heal(60, 80));
+        // Method reference — String::isEmpty used as a Filterable
+        Filterable noGenre = String::isEmpty;
+        System.out.println("Empty genre passes filter? " + noGenre.matches(""));
 
-        // Superhero has 3 abstract methods — cannot use a lambda, needs anonymous class
-        Superhero thor = new Superhero() {
+        // MusicService has 3 abstract methods — cannot use a lambda, needs anonymous class
+        MusicService service = new MusicService() {
             @Override
-            public String heroName() { return "Thor"; }
-
-            @Override
-            public double activate(int powerLevel, int targetArmor) {
-                return Math.pow(powerLevel, 1.5) - targetArmor;
+            public void play(String trackTitle) {
+                System.out.println("[Service] Streaming: " + trackTitle);
             }
 
             @Override
-            public double heal(int baseHealth, int bonus) {
-                return baseHealth + bonus;
+            public boolean matches(String genre) {
+                return genre.equals("pop") || genre.equals("indie");
+            }
+
+            @Override
+            public String recommend(String mood) {
+                return mood.equals("happy") ? "Happy - Pharrell Williams" : "Someone Like You - Adele";
             }
         };
 
-        System.out.println(thor.heroName() + " strikes for: " + thor.activate(100, 10));
-        System.out.println(thor.heroName() + " heals to: " + thor.heal(30, 70));
+        service.play("Levitating");
+        System.out.println("Matches 'indie'? " + service.matches("indie"));
+        System.out.println("Recommendation: " + service.recommend("happy"));
         System.out.println();
     }
 }
