@@ -1,23 +1,22 @@
 package org.example;
 
+import org.example.basics.BasicDemo;
+import org.example.functional.FunctionalDemo;
+import org.example.inheritance.InheritanceDemo;
 import org.example.math.impl.Calculator;
-import org.example.steps.Step1_InterfaceBasics;
-import org.example.steps.Step2_InterfaceSeparation;
-import org.example.steps.Step3_InterfaceInheritance;
-import org.example.steps.Step4_FunctionalInterface;
+import org.example.segregation.SegregationDemo;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        // Progressive steps — each builds on the previous one
-        Step1_InterfaceBasics.run();
-        Step2_InterfaceSeparation.run();
-        Step3_InterfaceInheritance.run();
-        Step4_FunctionalInterface.run();
+        BasicDemo.run();
+        SegregationDemo.run();
+        InheritanceDemo.run();
+        FunctionalDemo.run();
 
-        // Final result: use the extracted top-level interfaces + Calculator
-        System.out.println("=== Final: Top-level interfaces with Calculator ===");
+        // Final result: top-level interfaces from org.example.math
+        System.out.println("=== Final: top-level interfaces with Calculator ===");
         Calculator calculator = new Calculator();
         int a = 40, b = 2;
         System.out.println(a + " * " + b + " = " + calculator.multiply(a, b));
