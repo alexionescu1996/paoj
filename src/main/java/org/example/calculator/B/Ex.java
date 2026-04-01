@@ -35,12 +35,11 @@ public class Ex {
         result = calculator.applyFunction(pow, 123123, 0);
         System.out.println(result);
 
-        CallbackFunction callbackFunction = new CallbackFunction() {
+        calculator.applyFunctionWithCallback(pow, 241, 0, new CallbackFunction() {
             @Override
             public void onComplete(double result) {
                 System.out.println("=== computation result " + result + " ===");
             }
-        };
-        calculator.applyFunctionWithCallback(pow, 241, 0, callbackFunction);
+        });
     }
 }
