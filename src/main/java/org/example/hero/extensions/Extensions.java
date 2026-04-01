@@ -12,11 +12,11 @@ interface Immortal {
     void respawn();
 }
 
-interface SuperVillain extends DangerousVillain, Immortal {
-    void ruleTheWorld();
+interface Vampire extends DangerousVillain, Immortal {
+    void drainLife();
 }
 
-class Dracula implements SuperVillain {
+class Dracula implements Vampire {
 
     public void threaten() {}
 
@@ -24,5 +24,5 @@ class Dracula implements SuperVillain {
 
     public void respawn() {}
 
-    public void ruleTheWorld() {}
+    public void drainLife() {}
 }

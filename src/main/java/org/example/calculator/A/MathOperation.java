@@ -4,7 +4,7 @@ interface MathOperation {
 
     double multiply(double a, double b);
 
-    public static Double PI = Math.PI;
+    public static double PI = Math.PI;
 
     public static final String ERROR_MESSAGE = "Error message";
 
