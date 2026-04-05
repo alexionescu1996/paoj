@@ -2,45 +2,32 @@ package org.example.streaming.enums;
 
 public class Ex {
     public static void main(String[] args) {
-        System.out.println("=== ENUM - Genre ===");
-        for (Genre g : Genre.values()) {
-            System.out.printf("%-12s | %-12s | %s | recomandat: %s%n",
-                    g, g.getDisplayName(), g.getDescription(), g.getRecommendation().getDisplayName());
-        }
+        // Enum simplu
+        Genre g = Genre.POP;
+        System.out.println("Gen: " + g);
+        System.out.println("ordinal: " + g.ordinal());
+        System.out.println("valueOf: " + Genre.valueOf("ROCK"));
 
-        System.out.println("\nDiscover Weekly: " + Genre.randomGenre().getDisplayName());
-
-        // valueOf - converteste String -> enum
-        Genre rock = Genre.valueOf("ROCK");
-        System.out.println("valueOf(\"ROCK\"): " + rock.getDisplayName());
-
-        // ordinal - pozitia in enum
-        System.out.println("ROCK ordinal: " + Genre.ROCK.ordinal());
-
-        System.out.println("\n=== ENUM - ContentRating ===");
-        int userAge = 15;
-        System.out.println("Varsta utilizator: " + userAge);
-        for (ContentRating rating : ContentRating.values()) {
-            String access = rating.isAllowedForAge(userAge) ? "PERMITE" : "BLOCAT";
-            System.out.printf("  %-10s (%s): %s%n", rating, rating.getLabel(), access);
-        }
-
-        System.out.println("\n=== ENUM - Quality (metoda abstracta per constanta) ===");
+        // Enum cu campuri
+        System.out.println("\n--- Quality ---");
         for (Quality q : Quality.values()) {
-            System.out.printf("%-10s | %s | 60 min = %.1f MB%n",
-                    q, q.formatInfo(), q.dataMB(60));
+            System.out.println(q + " = " + q.getBitrateKbps() + " kbps");
         }
 
-        // Enum in switch
-        System.out.println("\n=== Switch pe enum ===");
-        Genre chosen = Genre.JAZZ;
-        String mood = switch (chosen) {
-            case POP, R_AND_B -> "Energic si distractiv!";
-            case ROCK, ELECTRONIC -> "Intens si puternic!";
-            case HIP_HOP -> "Ritmic si cool!";
-            case JAZZ, CLASSICAL -> "Relaxant si sofisticat!";
-            case PODCAST -> "Informativ si captivant!";
+        // Enum cu metoda abstracta
+        System.out.println("\n--- UserRole ---");
+        for (UserRole role : UserRole.values()) {
+            System.out.println(role + " -> " + role.monthlyPrice() + " RON/luna");
+        }
+
+        // Switch pe enum
+        Quality chosen = Quality.HIGH;
+        String desc = switch (chosen) {
+            case LOW -> "Economie de date";
+            case NORMAL -> "Calitate standard";
+            case HIGH -> "Calitate inalta";
+            case LOSSLESS -> "Fara pierderi";
         };
-        System.out.println(chosen.getDisplayName() + ": " + mood);
+        System.out.println("\n" + chosen + ": " + desc);
     }
 }

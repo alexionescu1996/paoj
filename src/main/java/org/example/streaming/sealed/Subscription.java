@@ -1,37 +1,15 @@
 package org.example.streaming.sealed;
 
 /**
- * SEALED CLASS (Java 17+):
- *
- * O clasa sealed restrictioneaza CINE o poate extinde.
- * Doar clasele listate in "permits" pot mosteni din ea.
- *
- * De ce?
- *   - Control total asupra ierarhiei de mostenire
- *   - Compilatorul stie TOATE subtipurile -> switch exhaustiv
- *   - Modelam domenii inchise (un abonament e DOAR Free, Premium, sau Family)
- *
- * Clasele permise TREBUIE sa fie: final, sealed, sau non-sealed.
+ * SEALED CLASS - doar clasele din "permits" pot extinde.
+ * Clasele permise trebuie sa fie: final, sealed, sau non-sealed.
  */
-public sealed class Subscription permits FreeSubscription, PremiumSubscription, FamilySubscription {
+public sealed class Subscription permits FreeSub, PremiumSub, FamilySub {
     private final String username;
-    private final String startDate;
 
-    public Subscription(String username, String startDate) {
+    public Subscription(String username) {
         this.username = username;
-        this.startDate = startDate;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public String getStartDate() {
-        return startDate;
-    }
-
-    @Override
-    public String toString() {
-        return username + " (din " + startDate + ")";
-    }
+    public String getUsername() { return username; }
 }

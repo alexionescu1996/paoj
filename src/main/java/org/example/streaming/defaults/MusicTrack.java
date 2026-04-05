@@ -1,37 +1,22 @@
 package org.example.streaming.defaults;
 
 /**
- * MusicTrack implementeaza Playable si Recommendable.
- * Suprascrie play() cu comportament custom. Foloseste default din ambele interfete.
+ * Suprascrie default method-ul play().
  */
-public class MusicTrack implements Playable, Recommendable {
+public class MusicTrack implements Playable {
     private String title;
     private String artist;
-    private int durationSeconds;
 
-    public MusicTrack(String title, String artist, int durationSeconds) {
+    public MusicTrack(String title, String artist) {
         this.title = title;
         this.artist = artist;
-        this.durationSeconds = durationSeconds;
     }
 
     @Override
     public String getTitle() { return title; }
 
     @Override
-    public String getArtist() { return artist; }
-
-    @Override
-    public int getDurationSeconds() { return durationSeconds; }
-
-    /**
-     * Suprascriem default method-ul play() cu comportament custom.
-     */
-    @Override
     public String play() {
-        // Apelam recommend() din Recommendable (default method)
-        System.out.println(recommend());
-        return "Now playing: " + title + " - " + artist
-                + " (" + formatDuration() + ") [HQ Audio]";
+        return "Playing: " + title + " - " + artist + " [HQ Audio]";
     }
 }

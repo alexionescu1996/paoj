@@ -1,13 +1,10 @@
 package org.example.streaming.adapter;
 
 /**
- * Interfata moderna pe care o foloseste platforma de streaming.
+ * Interfata moderna pe care o foloseste platforma.
  */
 public interface StreamingPlayer {
     String getTitle();
-    String getArtist();
     int getDurationSeconds();
-
     String play();
-    String pause();
 }
