@@ -1,4 +1,4 @@
-package org.example.payments.trycatch;
+package org.example.payments.b_trycatch;
 
 public class Card {
     private final String number;

@@ -1,4 +1,4 @@
-package org.example.payments.custom;
+package org.example.payments.d_custom;
 
 // Unchecked exception: extends RuntimeException.
 // The compiler does NOT force callers to handle it.

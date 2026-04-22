@@ -1,4 +1,4 @@
-package org.example.payments.custom;
+package org.example.payments.d_custom;
 
 // Checked exception: extends Exception.
 // The compiler forces callers to either catch it or declare it with throws.

@@ -1,4 +1,4 @@
-package org.example.payments.propagation;
+package org.example.payments.e_propagation;
 
 import java.io.IOException;
 

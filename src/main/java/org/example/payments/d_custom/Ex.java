@@ -1,4 +1,4 @@
-package org.example.payments.custom;
+package org.example.payments.d_custom;
 
 // Custom exceptions:
 // - extend Exception           -> checked   (compiler forces handling)

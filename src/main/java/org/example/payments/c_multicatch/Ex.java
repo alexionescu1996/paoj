@@ -1,4 +1,4 @@
-package org.example.payments.multicatch;
+package org.example.payments.c_multicatch;
 
 // Multiple catch blocks + finally.
 //

@@ -1,4 +1,4 @@
-package org.example.payments.resources;
+package org.example.payments.f_resources;
 
 import java.io.BufferedReader;
 import java.io.IOException;

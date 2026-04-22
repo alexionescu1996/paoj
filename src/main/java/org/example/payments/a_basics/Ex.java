@@ -1,4 +1,4 @@
-package org.example.payments.basics;
+package org.example.payments.a_basics;
 
 // Compile-time errors vs runtime errors (exceptions).
 //

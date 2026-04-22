@@ -1,4 +1,4 @@
-package org.example.payments.trycatch;
+package org.example.payments.b_trycatch;
 
 // try-catch: wrap code that may fail, and handle the exception
 // instead of letting the program crash.

@@ -1,4 +1,4 @@
-package org.example.payments.resources;
+package org.example.payments.f_resources;
 
 // Implementing AutoCloseable lets an object be used in try-with-resources.
 // close() runs automatically at the end of the try block, even if an
