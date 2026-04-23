@@ -1,19 +1,11 @@
 package org.example.payments.d_custom;
 
-// Checked exception: extends Exception.
-// The compiler forces callers to either catch it or declare it with throws.
-// Use it for recoverable, expected business conditions.
+// Custom checked exception: extends Exception.
+// Compiler forces callers to catch it or declare throws.
+// (Extend RuntimeException instead for an unchecked exception.)
 
 public class InsufficientFundsException extends Exception {
-
-    private final double missing;
-
-    public InsufficientFundsException(double missing) {
-        super("Insufficient funds. Missing: " + missing);
-        this.missing = missing;
-    }
-
-    public double getMissing() {
-        return missing;
+    public InsufficientFundsException(String message) {
+        super(message);
     }
 }

@@ -2,45 +2,27 @@ package org.example.payments.e_propagation;
 
 import java.io.IOException;
 
-// throw vs throws vs propagation.
+// throw  - statement that raises an exception.
+// throws - method clause declaring checked exceptions it may propagate.
+// Propagation: an unhandled exception travels up the call stack until
+// some caller catches it.
 //
-//   throw  - the statement that actually raises an exception object.
-//   throws - the method signature clause that DECLARES which checked
-//            exceptions a method may propagate to its caller.
-//
-// Propagation: if a method does not catch a thrown exception, it travels
-// up the call stack until some caller catches it, or the program ends.
-//
-// Handle where you can do something useful. Otherwise, propagate.
+// main -> checkout -> authorize (throws) -> caught in main
 
 public class Ex {
     public static void main(String[] args) {
         try {
-            checkout("order-42", 199.99);
-        } catch (PaymentGatewayException e) {
-            System.out.println("Checkout failed: " + e.getMessage());
-            System.out.println("Caused by: " + e.getCause());
-        }
-    }
-
-    // High-level: translates low-level failure into a domain exception.
-    // "Exception chaining" - we keep the original cause via the constructor.
-    static void checkout(String orderId, double amount) throws PaymentGatewayException {
-        try {
-            authorize(amount);
+            checkout(199.99);
         } catch (IOException e) {
-            throw new PaymentGatewayException("Order " + orderId + " could not be charged", e);
+            System.out.println("Caught in main: " + e.getMessage());
         }
     }
 
-    // Mid-level: does not handle the IOException, just declares it and
-    // lets it propagate up to checkout().
-    static void authorize(double amount) throws IOException {
-        callBankApi(amount);
+    static void checkout(double amount) throws IOException {
+        authorize(amount);   // not caught here - propagates
     }
 
-    // Low-level: actually throws. Simulates a network failure.
-    static void callBankApi(double amount) throws IOException {
-        throw new IOException("Bank API timeout for amount " + amount);
+    static void authorize(double amount) throws IOException {
+        throw new IOException("bank timeout for " + amount);
     }
 }
