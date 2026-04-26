@@ -1,4 +1,4 @@
-package org.example.B_io.c_bytestreams;
+package org.example.B_io.d_bytestreams;
 
 import javax.imageio.ImageIO;
 import java.awt.Color;

@@ -1,4 +1,4 @@
-package org.example.B_io.f_bytebuffer;
+package org.example.B_io.g_bytebuffer;
 
 import javax.imageio.ImageIO;
 import java.awt.Color;

@@ -1,4 +1,4 @@
-package org.example.B_io.d_buffered;
+package org.example.B_io.c_bufferedchars;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
