@@ -16,9 +16,9 @@ public class Ex {
     public static void main(String[] args) throws IOException {
         new File("data").mkdirs();
 
-        // Make a small source file with 1000 bytes.
+        // Make a small source file with some bytes.
         try (FileOutputStream out = new FileOutputStream("data/source.bin")) {
-            for (int i = 0; i < 1000; i++) out.write(i % 256);
+            out.write("Hello, buffered I/O!".getBytes());
         }
 
         // Copy it using buffered streams + a chunk array.
