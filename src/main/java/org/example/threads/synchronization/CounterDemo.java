@@ -1,68 +1,39 @@
 package org.example.threads.synchronization;
 
-// Demo race condition + sincronizare.
-//
-// Doua thread-uri incrementeaza acelasi contor de N ori.
-// Rezultat asteptat: 2*N.  Rezultat real fara sincronizare: < 2*N,
-// pentru ca "counter++" NU este atomic — sunt 3 operatii (citeste,
-// incrementeaza, scrie) si doua thread-uri se pot suprapune.
-//
-// Reparam in doua moduri:
-//   (a) metoda synchronized -> lock pe `this`
-//   (b) bloc synchronized(lock) -> lock pe un obiect ales de noi
-//
-// Metoda este simpla, dar incuie tot obiectul. Blocul e mai precis:
-// poti restrange sectiunea critica si poti folosi un lock dedicat.
+// counter++ NU e atomic (citeste, +1, scrie). Doua thread-uri se pot suprapune
+// -> rezultat mai mic decat 2*N. Reparam cu synchronized.
 public class CounterDemo {
 
-    static class UnsafeCounter {
-        int value = 0;
-        void increment() { value++; }
+    static class Unsafe {
+        int value;
+        void inc() { value++; }
     }
 
-    static class SyncMethodCounter {
-        int value = 0;
-        // synchronized pe metoda = "incuie acest obiect (this) cat tine apelul"
-        synchronized void increment() { value++; }
+    static class SyncMethod {
+        int value;
+        synchronized void inc() { value++; } // lock pe `this`
     }
 
-    static class SyncBlockCounter {
-        int value = 0;
-        // Lock dedicat: nu folosim `this`, ca sa nu blocam alte metode.
-        private final Object lock = new Object();
-
-        void increment() {
-            // Doar bucatica critica e protejata; restul metodei (daca ar fi)
-            // ramane liber pentru alte thread-uri.
-            synchronized (lock) {
-                value++;
-            }
+    static class SyncBlock {
+        int value;
+        private final Object lock = new Object(); // lock dedicat, nu `this`
+        void inc() {
+            synchronized (lock) { value++; }
         }
     }
 
-    private static final int ITER = 100_000;
+    static final int N = 100_000;
 
     public static void main(String[] args) throws InterruptedException {
-        UnsafeCounter unsafe = new UnsafeCounter();
-        runTwoThreads(unsafe::increment);
-        System.out.println("Unsafe        : " + unsafe.value
-                + "  (asteptam " + (2 * ITER) + ") -> de obicei mai mic");
-
-        SyncMethodCounter sm = new SyncMethodCounter();
-        runTwoThreads(sm::increment);
-        System.out.println("Sync method   : " + sm.value + "  -> mereu corect");
-
-        SyncBlockCounter sb = new SyncBlockCounter();
-        runTwoThreads(sb::increment);
-        System.out.println("Sync block    : " + sb.value + "  -> mereu corect");
+        var u = new Unsafe();      run(u::inc); System.out.println("unsafe: " + u.value);
+        var m = new SyncMethod();  run(m::inc); System.out.println("method: " + m.value);
+        var b = new SyncBlock();   run(b::inc); System.out.println("block:  " + b.value);
     }
 
-    private static void runTwoThreads(Runnable op) throws InterruptedException {
-        Thread t1 = new Thread(() -> { for (int i = 0; i < ITER; i++) op.run(); });
-        Thread t2 = new Thread(() -> { for (int i = 0; i < ITER; i++) op.run(); });
-        t1.start();
-        t2.start();
-        t1.join();
-        t2.join();
+    static void run(Runnable op) throws InterruptedException {
+        Thread t1 = new Thread(() -> { for (int i = 0; i < N; i++) op.run(); });
+        Thread t2 = new Thread(() -> { for (int i = 0; i < N; i++) op.run(); });
+        t1.start(); t2.start();
+        t1.join(); t2.join();
     }
 }

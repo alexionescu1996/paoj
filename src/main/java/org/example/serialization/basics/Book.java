@@ -2,47 +2,23 @@ package org.example.serialization.basics;
 
 import java.io.Serializable;
 
-// Domain class care arata cum functioneaza serializarea standard:
-//  - implements Serializable (interfata marker, fara metode)
-//  - serialVersionUID pentru a controla compatibilitatea intre versiuni
-//  - un camp transient care NU se serializeaza
-//  - o referinta catre alt obiect Serializable -> graf de obiecte
 public class Book implements Serializable {
 
-    // Daca lipseste, JVM genereaza unul automat pe baza structurii clasei,
-    // iar orice modificare a clasei sparge fisierele vechi.
-    // Il fixam explicit ca sa controlam noi compatibilitatea.
+    // Daca lipseste, JVM-ul il genereaza si orice modificare a clasei sparge fisierele vechi.
     private static final long serialVersionUID = 1L;
 
     private final String title;
-    private final double price;
-    private final Author author;
+    private final Author author;        // referinta -> graf de obiecte
+    private transient String session;   // transient = NU se serializeaza
 
-    // transient = "nu serializa". Tipic pentru:
-    //  - cache-uri recalculabile
-    //  - parole / chei / sesiuni
-    //  - resurse netransportabile (Thread, Socket, conexiuni DB)
-    private transient String cachedDisplayName;
-
-    public Book(String title, double price, Author author) {
+    public Book(String title, Author author) {
         this.title = title;
-        this.price = price;
         this.author = author;
-        this.cachedDisplayName = computeDisplayName();
-    }
-
-    private String computeDisplayName() {
-        return title + " by " + (author != null ? author.getName() : "?");
-    }
-
-    public String getCachedDisplayName() {
-        return cachedDisplayName;
+        this.session = "tmp-token-" + System.currentTimeMillis();
     }
 
     @Override
     public String toString() {
-        return "Book{title='" + title + "', price=" + price
-                + ", author=" + author
-                + ", cachedDisplayName=" + cachedDisplayName + "}";
+        return "Book{title='" + title + "', author=" + author + ", session=" + session + "}";
     }
 }

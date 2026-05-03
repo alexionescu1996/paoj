@@ -1,14 +1,13 @@
 package org.example.threads.producerconsumer;
 
-// Producer: bucatarul pune pizza pe tejghea la intervale aleatoare.
 public class Cook implements Runnable {
 
     private final PizzaCounter counter;
-    private final String pizzaType;
+    private final String type;
 
-    public Cook(PizzaCounter counter, String pizzaType) {
+    public Cook(PizzaCounter counter, String type) {
         this.counter = counter;
-        this.pizzaType = pizzaType;
+        this.type = type;
     }
 
     @Override
@@ -16,12 +15,10 @@ public class Cook implements Runnable {
         int n = 0;
         try {
             while (!Thread.currentThread().isInterrupted()) {
-                Thread.sleep(200 + (long) (Math.random() * 300));
-                counter.put(pizzaType + "#" + (++n));
+                Thread.sleep(200);
+                counter.put(type + "#" + (++n));
             }
         } catch (InterruptedException e) {
-            // interrupt primit fie din sleep, fie din wait() in put().
-            // Ambele inseamna "opreste-te". Pastram flag-ul si iesim.
             Thread.currentThread().interrupt();
         }
     }
