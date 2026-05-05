@@ -8,7 +8,7 @@ din IDE sau cu `java -cp target/classes <fully.qualified.ClassName>`.
 ## Serialization
 
 ### `org.example.serialization.intro`
-- `Ex` — punte de la lab-ul trecut (fisiere + string-uri, parsare manuala) catre serializare. Salveaza un `Book` ca text "title|author|price", il citeste si parseaza manual; comentariile arata limitele acestei abordari.
+- `Ex` — punte de la lab-ul trecut: scrie un string ca `byte[]` cu `FileOutputStream`, citeste inapoi cu `FileInputStream`, afiseaza valorile bytes. Comentarii despre cum acelasi mecanism merge pentru imagini si de ce avem nevoie de un format pentru obiecte (-> serializare).
 
 ### `org.example.serialization.basics`
 - `Book` — domeniu `Serializable`, contine `serialVersionUID`, un camp `transient` si o referinta catre `Author`.

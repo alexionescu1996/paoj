@@ -1,51 +1,57 @@
 package org.example.serialization.intro;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 
-// PUNTE de la lab-ul trecut (fisiere + string-uri) catre serializare.
+// PUNTE de la lab-ul trecut catre serializare.
 //
-// Data trecuta am salvat date pe disc ca text:
-//   - deschidem un PrintWriter / BufferedReader
-//   - convertim manual fiecare camp la string si invers
-//   - parsam noi tipurile (Double.parseDouble, etc.) si tratam exceptii
-//   - format inventat de noi (separator "|") si fragil
+// Pe disc nu exista "String-uri", "int-uri" sau "obiecte" — sunt doar BYTES.
+// Tot ce inseamna "salvez ceva intr-un fisier" este de fapt:
+//   1. transform datele in byte[]
+//   2. le scriu cu un OutputStream
+// La citire e invers: citesc byte[] cu un InputStream si le INTERPRETEZ.
 //
-// Daca obiectul are referinte la alte obiecte, treaba se complica rapid.
-// Solutia "out of the box" pentru a salva un obiect intreg + grafurile lui:
-// SERIALIZARE (vezi pachetele basics si externalizable).
+// Acelasi mecanism merge pentru orice: text, imagini, audio, video.
+// Diferenta e doar in cum interpretezi bytes-ii la citire.
 public class Ex {
 
-    record Book(String title, String author, double price) {}
-
-    private static final String FILE = "book.txt";
+    private static final String FILE = "data.bin";
 
     public static void main(String[] args) throws IOException {
-        Book original = new Book("Luceafarul", "Eminescu", 49.9);
+        String mesaj = "Salut PAOJ!";
 
-        // ----- scriere ca text -----
-        try (PrintWriter out = new PrintWriter(FILE)) {
-            out.println(original.title() + "|" + original.author() + "|" + original.price());
+        // String -> byte[]  (alegem encoding-ul; UTF-8 e default sigur)
+        byte[] bytes = mesaj.getBytes();
+
+        // SCRIERE: byte[] -> fisier
+        try (FileOutputStream out = new FileOutputStream(FILE)) {
+            out.write(bytes);
         }
 
-        // ----- citire + parsare manuala -----
-        Book restored;
-        try (BufferedReader in = new BufferedReader(new FileReader(FILE))) {
-            String[] parts = in.readLine().split("\\|");
-            // atentie: Double.parseDouble poate arunca NumberFormatException
-            restored = new Book(parts[0], parts[1], Double.parseDouble(parts[2]));
+        // Sa vedem ce e EFECTIV pe disc:
+        System.out.print("bytes scrisi: ");
+        for (byte b : bytes) System.out.print(b + " ");
+        System.out.println();
+        // ex: 83 97 108 117 116 32 80 65 79 74 33  -> codurile ASCII ale literelor
+
+        // CITIRE: fisier -> byte[] -> String
+        byte[] readBack;
+        try (FileInputStream in = new FileInputStream(FILE)) {
+            readBack = in.readAllBytes();
         }
+        String restored = new String(readBack);
+        System.out.println("citit inapoi: " + restored);
 
-        System.out.println("inainte: " + original);
-        System.out.println("dupa:    " + restored);
-
-        // Probleme cu abordarea asta:
-        //   1. trebuie sa stim formatul exact la citire
-        //   2. parsarea tipurilor (double, int, date) e in sarcina noastra
-        //   3. daca title contine "|" -> spart
-        //   4. daca Book are alt obiect inauntru (Author) -> il serializam si pe ala manual?
-        // => trecem la ObjectOutputStream / ObjectInputStream.
+        // O imagine PNG pe disc incepe cu bytes-ii: 137 80 78 71 ...
+        // Daca am citi un PNG cu acelasi cod, am avea byte[] corect,
+        // doar ca "new String(...)" nu e interpretarea potrivita —
+        // ne-ar trebui un decoder de imagine.
+        //
+        // Concluzie: scrierea/citirea de bytes e generica.
+        // Greu este sa decizi FORMATUL si INTERPRETAREA.
+        // Pentru un obiect Java cu campuri si referinte, formatul ar fi
+        // complicat de inventat manual. De aici incolo: serializare —
+        // JVM-ul defineste formatul si il interpreteaza pentru tine.
     }
 }

@@ -42,4 +42,4 @@ build/
 .idea
 
 *.ser
-book.txt
+*.bin
