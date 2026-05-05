@@ -1,4 +1,4 @@
-package org.example.threads.producerconsumer;
+package org.example.D_threads.g_producerconsumer;
 
 public class Waiter implements Runnable {
 

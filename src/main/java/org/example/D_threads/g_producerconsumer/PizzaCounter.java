@@ -1,9 +1,10 @@
-package org.example.threads.producerconsumer;
+package org.example.D_threads.g_producerconsumer;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-// Buffer marginit. wait() elibereaza lock-ul si dormita. notify() trezeste 1 thread.
+// Bounded buffer. wait() releases the lock and parks the thread.
+// notify() wakes ONE thread waiting on this monitor.
 public class PizzaCounter {
 
     private final Queue<String> q = new LinkedList<>();
@@ -12,7 +13,8 @@ public class PizzaCounter {
     public PizzaCounter(int capacity) { this.capacity = capacity; }
 
     public synchronized void put(String pizza) throws InterruptedException {
-        // while, NU if: dupa wakeup conditia poate fi inca falsa (spurious wakeups, alt thread servit)
+        // while, NOT if: after wakeup the condition can still be false
+        // (spurious wakeups, or another thread was served first).
         while (q.size() == capacity) wait();
         q.add(pizza);
         System.out.println("put " + pizza + " (" + q.size() + "/" + capacity + ")");

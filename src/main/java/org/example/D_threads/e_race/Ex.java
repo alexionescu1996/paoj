@@ -1,8 +1,11 @@
-package org.example.threads.synchronization;
+package org.example.D_threads.e_race;
 
-// counter++ NU e atomic (citeste, +1, scrie). Doua thread-uri se pot suprapune
-// -> rezultat mai mic decat 2*N. Reparam cu synchronized.
-public class CounterDemo {
+// counter++ is NOT atomic (read, +1, write). Two threads can interleave
+// and overwrite each other -> result smaller than 2*N.
+// Fix with synchronized: method (lock on `this`) or block (lock on a
+// dedicated object so we can narrow the critical section).
+
+public class Ex {
 
     static class Unsafe {
         int value;
@@ -11,12 +14,12 @@ public class CounterDemo {
 
     static class SyncMethod {
         int value;
-        synchronized void inc() { value++; } // lock pe `this`
+        synchronized void inc() { value++; } // lock on `this`
     }
 
     static class SyncBlock {
         int value;
-        private final Object lock = new Object(); // lock dedicat, nu `this`
+        private final Object lock = new Object(); // dedicated lock, not `this`
         void inc() {
             synchronized (lock) { value++; }
         }

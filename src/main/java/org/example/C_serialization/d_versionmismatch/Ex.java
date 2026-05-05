@@ -1,4 +1,4 @@
-package org.example.serialization.basics;
+package org.example.C_serialization.d_versionmismatch;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -9,9 +9,12 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectStreamClass;
 import java.io.Serializable;
 
-// Cand serialVersionUID din fisierul vechi != serialVersionUID din clasa curenta
-// -> InvalidClassException la readObject.
-public class VersionMismatchDemo {
+// When the serialVersionUID in the stream does not match the local class,
+// readObject throws InvalidClassException. Real-life trigger: write with
+// version 1 of the class, change the class, try to read the old file.
+// Here we simulate it by redirecting BookV1 to BookV2 on read.
+
+public class Ex {
 
     static class BookV1 implements Serializable {
         private static final long serialVersionUID = 1L;
@@ -27,7 +30,7 @@ public class VersionMismatchDemo {
             out.writeObject(new BookV1());
         }
 
-        // La citire, redirectam BookV1 -> BookV2 ca sa apara mismatch-ul de UID.
+        // On read, redirect BookV1 -> BookV2 so the UID mismatch surfaces.
         try (var in = new ObjectInputStream(new ByteArrayInputStream(bytes.toByteArray())) {
             @Override
             protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException {

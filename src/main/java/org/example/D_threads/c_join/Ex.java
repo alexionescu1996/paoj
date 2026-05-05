@@ -1,8 +1,10 @@
-package org.example.threads.basics;
+package org.example.D_threads.c_join;
 
-// join() = blocheaza firul curent pana cand thread-ul referit termina.
-// Tipic cand main porneste task-uri paralele si vrea sa citeasca rezultatul DUPA ce toate au gata.
-public class JoinDemo {
+// join() = block the current thread until the target thread finishes.
+// Typical when main starts parallel tasks and needs to wait for all of
+// them before reading results.
+
+public class Ex {
 
     static Runnable task(String name) {
         return () -> {
@@ -20,9 +22,10 @@ public class JoinDemo {
 
         t1.start(); t2.start(); t3.start();
 
-        // fara join(), ar afisa timpul aproape instant si ar iesi inainte de "done"
+        // Without join(), main would print the time almost instantly
+        // and exit before "done" lines appear.
         t1.join(); t2.join(); t3.join();
 
-        System.out.println("total: " + (System.currentTimeMillis() - t0) + " ms"); // ~500, nu 1500
+        System.out.println("total: " + (System.currentTimeMillis() - t0) + " ms"); // ~500, not 1500
     }
 }

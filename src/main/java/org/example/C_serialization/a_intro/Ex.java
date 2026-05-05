@@ -1,4 +1,4 @@
-package org.example.serialization.intro;
+package org.example.C_serialization.a_intro;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,14 +7,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-// Bridge from the previous lab (B_io). Last week we wrote bytes and
-// characters to files. Now we have a Book OBJECT with multiple fields.
-// How do we persist a whole object?
+// Bridge from B_io. Last week we wrote bytes and characters to files.
+// Now we have a Book OBJECT with multiple fields - how do we persist it?
 //
 // First attempt with what we already know: invent a text format,
 // write each field line by line, parse it back on read.
-// It works for this case but gets ugly fast — that is what serialization
-// (next packages) will solve for us.
+// Works for this simple case but does not scale - that is what
+// serialization (next packages) will solve for us.
 
 public class Ex {
 
