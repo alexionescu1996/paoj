@@ -1,57 +1,58 @@
 package org.example.serialization.intro;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
-// PUNTE de la lab-ul trecut catre serializare.
+// Bridge from the previous lab (B_io). Last week we wrote bytes and
+// characters to files. Now we have a Book OBJECT with multiple fields.
+// How do we persist a whole object?
 //
-// Pe disc nu exista "String-uri", "int-uri" sau "obiecte" — sunt doar BYTES.
-// Tot ce inseamna "salvez ceva intr-un fisier" este de fapt:
-//   1. transform datele in byte[]
-//   2. le scriu cu un OutputStream
-// La citire e invers: citesc byte[] cu un InputStream si le INTERPRETEZ.
-//
-// Acelasi mecanism merge pentru orice: text, imagini, audio, video.
-// Diferenta e doar in cum interpretezi bytes-ii la citire.
+// First attempt with what we already know: invent a text format,
+// write each field line by line, parse it back on read.
+// It works for this case but gets ugly fast — that is what serialization
+// (next packages) will solve for us.
+
 public class Ex {
 
-    private static final String FILE = "data.bin";
+    record Book(String title, String author, double price) {}
 
     public static void main(String[] args) throws IOException {
-        String mesaj = "Salut PAOJ!";
+        new File("data").mkdirs();
+        File file = new File("data/book.txt");
 
-        // String -> byte[]  (alegem encoding-ul; UTF-8 e default sigur)
-        byte[] bytes = mesaj.getBytes();
+        Book original = new Book("Luceafarul", "Eminescu", 49.9);
 
-        // SCRIERE: byte[] -> fisier
-        try (FileOutputStream out = new FileOutputStream(FILE)) {
-            out.write(bytes);
+        // WRITE: one field per line, in a fixed order we agree on.
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
+            out.write(original.title());            out.newLine();
+            out.write(original.author());           out.newLine();
+            out.write(String.valueOf(original.price()));
         }
 
-        // Sa vedem ce e EFECTIV pe disc:
-        System.out.print("bytes scrisi: ");
-        for (byte b : bytes) System.out.print(b + " ");
-        System.out.println();
-        // ex: 83 97 108 117 116 32 80 65 79 74 33  -> codurile ASCII ale literelor
-
-        // CITIRE: fisier -> byte[] -> String
-        byte[] readBack;
-        try (FileInputStream in = new FileInputStream(FILE)) {
-            readBack = in.readAllBytes();
+        // READ: must remember the same order and parse each type ourselves.
+        Book restored;
+        try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+            String title  = in.readLine();
+            String author = in.readLine();
+            double price  = Double.parseDouble(in.readLine()); // NumberFormatException possible
+            restored = new Book(title, author, price);
         }
-        String restored = new String(readBack);
-        System.out.println("citit inapoi: " + restored);
 
-        // O imagine PNG pe disc incepe cu bytes-ii: 137 80 78 71 ...
-        // Daca am citi un PNG cu acelasi cod, am avea byte[] corect,
-        // doar ca "new String(...)" nu e interpretarea potrivita —
-        // ne-ar trebui un decoder de imagine.
+        System.out.println("before: " + original);
+        System.out.println("after:  " + restored);
+
+        // Problems with this approach:
+        //   1. We define and remember the format on both sides.
+        //   2. Every type needs its own parsing (Double, Integer, LocalDate...).
+        //   3. If a field contains a newline, the format breaks.
+        //   4. If Book holds another object (Author, List<Tag>...), it gets ugly fast.
         //
-        // Concluzie: scrierea/citirea de bytes e generica.
-        // Greu este sa decizi FORMATUL si INTERPRETAREA.
-        // Pentru un obiect Java cu campuri si referinte, formatul ar fi
-        // complicat de inventat manual. De aici incolo: serializare —
-        // JVM-ul defineste formatul si il interpreteaza pentru tine.
+        // Next: ObjectOutputStream / ObjectInputStream do all this for us.
+        // The JVM defines the format, handles types, and walks the entire
+        // object graph automatically.
     }
 }
