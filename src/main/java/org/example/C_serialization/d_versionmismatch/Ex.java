@@ -3,6 +3,7 @@ package org.example.C_serialization.d_versionmismatch;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -24,20 +25,32 @@ public class Ex {
         private static final long serialVersionUID = 2L;
     }
 
+    // Custom ObjectInputStream that pretends BookV1 in the file is actually
+    // BookV2. Needed only to simulate two "versions" of the class in one run.
+    static class RedirectingInputStream extends ObjectInputStream {
+        RedirectingInputStream(InputStream in) throws IOException {
+            super(in);
+        }
+
+        @Override
+        protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException {
+            if (desc.getName().equals(BookV1.class.getName())) {
+                return BookV2.class;
+            }
+            return super.resolveClass(desc);
+        }
+    }
+
     public static void main(String[] args) throws Exception {
+        // Write with BookV1 (UID = 1).
         var bytes = new ByteArrayOutputStream();
         try (var out = new ObjectOutputStream(bytes)) {
             out.writeObject(new BookV1());
         }
 
-        // On read, redirect BookV1 -> BookV2 so the UID mismatch surfaces.
-        try (var in = new ObjectInputStream(new ByteArrayInputStream(bytes.toByteArray())) {
-            @Override
-            protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException {
-                if (desc.getName().equals(BookV1.class.getName())) return BookV2.class;
-                return super.resolveClass(desc);
-            }
-        }) {
+        // Read pretending it is BookV2 (UID = 2) -> mismatch -> exception.
+        var input = new ByteArrayInputStream(bytes.toByteArray());
+        try (var in = new RedirectingInputStream(input)) {
             in.readObject();
         } catch (InvalidClassException e) {
             System.out.println("InvalidClassException: " + e.getMessage());
