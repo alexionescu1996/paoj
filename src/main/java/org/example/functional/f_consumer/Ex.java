@@ -1,21 +1,25 @@
 package org.example.functional.f_consumer;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
 public class Ex {
     public static void main(String[] args) {
 
-        Consumer<String> printer = s -> System.out.println("> " + s);
-        printer.accept("hello");
+        Consumer<String> log = email -> System.out.println("[log] dispatching to " + email);
+        Consumer<String> sendEmail = email -> System.out.println("    --> email sent to " + email);
 
-        Consumer<String> shouter = s -> System.out.println(s.toUpperCase());
+        log.accept("alice@example.com");
 
-        Consumer<String> chained = printer.andThen(shouter);
-        chained.accept("world");
+        Consumer<String> logThenSend = log.andThen(sendEmail);
+        logThenSend.accept("bob@example.com");
 
-        List<String> heroes = Arrays.asList("Superman", "Batman", "Wonder Woman");
-        heroes.forEach(printer);
+        List<String> subscribers = List.of(
+                "alice@example.com",
+                "bob@example.com",
+                "carol@example.com"
+        );
+        System.out.println("\n--- newsletter dispatch ---");
+        subscribers.forEach(logThenSend);
     }
 }

@@ -7,24 +7,24 @@ import java.util.stream.Collectors;
 public class Ex {
     public static void main(String[] args) {
 
-        List<String> words = List.of("banana", "fig", "apple", "kiwi", "cherry");
+        List<String> cities = List.of("Bucharest", "Paris", "London", "Tokyo", "Cluj-Napoca", "Rome");
 
-        List<String> alphabetical = words.stream()
+        List<String> alphabetical = cities.stream()
                 .sorted()
                 .collect(Collectors.toList());
-        System.out.println("alphabetical = " + alphabetical);
+        System.out.println("alphabetical   = " + alphabetical);
 
-        List<String> byLength = words.stream()
+        List<String> byLength = cities.stream()
                 .sorted(Comparator.comparingInt(String::length))
                 .collect(Collectors.toList());
-        System.out.println("by length    = " + byLength);
+        System.out.println("by name length = " + byLength);
 
-        List<String> byLengthDesc = words.stream()
+        List<String> byLengthDesc = cities.stream()
                 .sorted(Comparator.comparingInt(String::length).reversed())
                 .collect(Collectors.toList());
         System.out.println("by length desc = " + byLengthDesc);
 
-        List<String> tieBreaker = words.stream()
+        List<String> tieBreaker = cities.stream()
                 .sorted(Comparator.comparingInt(String::length).thenComparing(Comparator.naturalOrder()))
                 .collect(Collectors.toList());
         System.out.println("by length, then alpha = " + tieBreaker);

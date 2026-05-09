@@ -7,23 +7,23 @@ import java.util.stream.Collectors;
 public class Ex {
     public static void main(String[] args) {
 
-        List<String> words = List.of("apple", "banana", "apple", "cherry", "banana");
+        List<String> tags = List.of("electronics", "audio", "electronics", "wireless", "audio", "gift");
 
-        List<String> asList = words.stream()
+        List<String> normalised = tags.stream()
                 .map(String::toUpperCase)
                 .collect(Collectors.toList());
-        System.out.println("toList   = " + asList);
+        System.out.println("toList   = " + normalised);
 
-        Set<String> asSet = words.stream()
+        Set<String> uniqueTags = tags.stream()
                 .collect(Collectors.toSet());
-        System.out.println("toSet    = " + asSet);
+        System.out.println("toSet    = " + uniqueTags);
 
-        String joined = words.stream()
+        String csv = tags.stream()
                 .distinct()
                 .collect(Collectors.joining(", ", "[", "]"));
-        System.out.println("joining  = " + joined);
+        System.out.println("joining  = " + csv);
 
-        long count = words.stream().collect(Collectors.counting());
+        long count = tags.stream().collect(Collectors.counting());
         System.out.println("counting = " + count);
     }
 }

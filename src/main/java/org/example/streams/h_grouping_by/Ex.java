@@ -5,24 +5,39 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Ex {
+
+    record Product(String name, String category, double price) {}
+
     public static void main(String[] args) {
 
-        List<String> words = List.of("apple", "fig", "banana", "kiwi", "cherry", "pear", "plum");
+        List<Product> catalog = List.of(
+                new Product("Headphones", "electronics", 79.0),
+                new Product("Mug", "kitchen", 8.5),
+                new Product("Keyboard", "electronics", 120.0),
+                new Product("Pan", "kitchen", 35.0),
+                new Product("Notebook", "stationery", 4.5),
+                new Product("Pen", "stationery", 1.5),
+                new Product("Speaker", "electronics", 60.0)
+        );
 
-        Map<Integer, List<String>> byLength = words.stream()
-                .collect(Collectors.groupingBy(String::length));
-        System.out.println("groupingBy length = " + byLength);
+        Map<String, List<Product>> byCategory = catalog.stream()
+                .collect(Collectors.groupingBy(Product::category));
+        System.out.println("groupingBy(category):");
+        byCategory.forEach((cat, items) -> System.out.println("  " + cat + " -> " + items));
 
-        Map<Character, List<String>> byFirstLetter = words.stream()
-                .collect(Collectors.groupingBy(w -> w.charAt(0)));
-        System.out.println("groupingBy first letter = " + byFirstLetter);
+        Map<String, Long> countByCategory = catalog.stream()
+                .collect(Collectors.groupingBy(Product::category, Collectors.counting()));
+        System.out.println("\ncount by category = " + countByCategory);
 
-        Map<Integer, Long> countByLength = words.stream()
-                .collect(Collectors.groupingBy(String::length, Collectors.counting()));
-        System.out.println("count by length = " + countByLength);
+        Map<String, Double> avgPriceByCategory = catalog.stream()
+                .collect(Collectors.groupingBy(
+                        Product::category,
+                        Collectors.averagingDouble(Product::price)));
+        System.out.println("avg price by category = " + avgPriceByCategory);
 
-        Map<Boolean, List<String>> partitioned = words.stream()
-                .collect(Collectors.partitioningBy(w -> w.length() > 4));
-        System.out.println("partition by length>4 = " + partitioned);
+        Map<Boolean, List<Product>> partitioned = catalog.stream()
+                .collect(Collectors.partitioningBy(p -> p.price() >= 50));
+        System.out.println("\npartition by price >= 50:");
+        partitioned.forEach((isPremium, items) -> System.out.println("  premium=" + isPremium + " -> " + items));
     }
 }

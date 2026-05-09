@@ -6,14 +6,15 @@ import java.util.function.Supplier;
 public class Ex {
     public static void main(String[] args) {
 
-        Supplier<String> hello = () -> "hello world";
-        System.out.println(hello.get());
+        Supplier<String> welcomeBanner = () -> "=== Welcome to the Store ===";
+        System.out.println(welcomeBanner.get());
 
-        Supplier<String> idGenerator = () -> UUID.randomUUID().toString();
-        System.out.println("id 1 = " + idGenerator.get());
-        System.out.println("id 2 = " + idGenerator.get());
+        Supplier<String> orderIdGenerator = () -> "ORD-" + UUID.randomUUID();
+        System.out.println("order 1 = " + orderIdGenerator.get());
+        System.out.println("order 2 = " + orderIdGenerator.get());
 
-        Supplier<Double> randomScore = Math::random;
-        System.out.println("random = " + randomScore.get());
+        Supplier<Integer> diceRoll = () -> 1 + (int) (Math.random() * 6);
+        System.out.println("dice roll = " + diceRoll.get());
+        System.out.println("dice roll = " + diceRoll.get());
     }
 }

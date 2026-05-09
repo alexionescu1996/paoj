@@ -3,16 +3,20 @@ package org.example.functional.a_functional_interface;
 public class Ex {
     public static void main(String[] args) {
 
-        Greeter formal = new Greeter() {
+        Discount blackFriday = new Discount() {
             @Override
-            public String greet(String name) {
-                return "Good day, " + name;
+            public double apply(double price) {
+                return price * 0.5;
             }
         };
 
-        Greeter casual = name -> "Hey " + name + "!";
+        Discount studentDiscount = price -> price * 0.85;
+        Discount loyaltyDiscount = price -> price - 10;
 
-        System.out.println(formal.greet("Alice"));
-        System.out.println(casual.greet("Bob"));
+        double cartTotal = 120.0;
+        System.out.println("original         = " + cartTotal);
+        System.out.println("black friday     = " + blackFriday.apply(cartTotal));
+        System.out.println("student discount = " + studentDiscount.apply(cartTotal));
+        System.out.println("loyalty discount = " + loyaltyDiscount.apply(cartTotal));
     }
 }

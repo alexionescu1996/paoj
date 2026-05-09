@@ -7,22 +7,22 @@ import java.util.function.Predicate;
 public class Ex {
     public static void main(String[] args) {
 
-        Predicate<Integer> isPositive = n -> n > 0;
-        Predicate<Integer> isEven = n -> n % 2 == 0;
+        Predicate<Integer> isPassing = score -> score >= 50;
+        Predicate<Integer> isHonors = score -> score >= 80;
 
-        System.out.println("isPositive.test(5)  = " + isPositive.test(5));
-        System.out.println("isEven.test(7)      = " + isEven.test(7));
+        System.out.println("isPassing.test(45) = " + isPassing.test(45));
+        System.out.println("isHonors.test(92)  = " + isHonors.test(92));
 
-        Predicate<Integer> positiveAndEven = isPositive.and(isEven);
-        Predicate<Integer> positiveOrEven = isPositive.or(isEven);
-        Predicate<Integer> notPositive = isPositive.negate();
+        Predicate<Integer> passingButNotHonors = isPassing.and(isHonors.negate());
+        Predicate<Integer> passingOrHonors = isPassing.or(isHonors);
+        Predicate<Integer> failing = isPassing.negate();
 
-        System.out.println("positiveAndEven(4)  = " + positiveAndEven.test(4));
-        System.out.println("positiveOrEven(-2)  = " + positiveOrEven.test(-2));
-        System.out.println("notPositive(-3)     = " + notPositive.test(-3));
+        System.out.println("passingButNotHonors(70) = " + passingButNotHonors.test(70));
+        System.out.println("passingOrHonors(40)     = " + passingOrHonors.test(40));
+        System.out.println("failing(30)             = " + failing.test(30));
 
-        List<Integer> numbers = new ArrayList<>(List.of(-3, -2, -1, 0, 1, 2, 3, 4));
-        numbers.removeIf(notPositive);
-        System.out.println("after removeIf(notPositive) = " + numbers);
+        List<Integer> classScores = new ArrayList<>(List.of(92, 45, 78, 33, 88, 50, 12, 65));
+        classScores.removeIf(failing);
+        System.out.println("scores after removing failing students = " + classScores);
     }
 }

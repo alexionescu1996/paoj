@@ -5,18 +5,22 @@ import java.util.function.Function;
 public class Ex {
     public static void main(String[] args) {
 
-        Function<String, Integer> length = s -> s.length();
-        Function<Integer, Integer> doubler = n -> n * 2;
+        Function<String, Integer> wordCount = review -> review.trim().isEmpty()
+                ? 0
+                : review.trim().split("\\s+").length;
+        Function<Integer, Integer> engagementScore = words -> words * 2;
 
-        System.out.println("length.apply('hello') = " + length.apply("hello"));
+        String review = "Loved the product, fast shipping and great quality";
+        System.out.println("review        = \"" + review + "\"");
+        System.out.println("wordCount     = " + wordCount.apply(review));
 
-        Function<String, Integer> lengthThenDouble = length.andThen(doubler);
-        System.out.println("lengthThenDouble('hello') = " + lengthThenDouble.apply("hello"));
+        Function<String, Integer> reviewToScore = wordCount.andThen(engagementScore);
+        System.out.println("andThen score = " + reviewToScore.apply(review));
 
-        Function<String, Integer> composed = doubler.compose(length);
-        System.out.println("composed('hello')        = " + composed.apply("hello"));
+        Function<String, Integer> composed = engagementScore.compose(wordCount);
+        System.out.println("compose score = " + composed.apply(review));
 
         Function<String, String> identity = Function.identity();
-        System.out.println("identity('x') = " + identity.apply("x"));
+        System.out.println("identity      = " + identity.apply(review));
     }
 }

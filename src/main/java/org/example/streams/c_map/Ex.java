@@ -6,23 +6,23 @@ import java.util.stream.Collectors;
 public class Ex {
     public static void main(String[] args) {
 
-        List<String> words = List.of("apple", "banana", "cherry");
+        List<String> products = List.of("Headphones", "Mug", "Keyboard");
 
-        List<String> upper = words.stream()
+        List<String> skuPrefixes = products.stream()
                 .map(String::toUpperCase)
                 .collect(Collectors.toList());
-        System.out.println("upper   = " + upper);
+        System.out.println("upper-cased SKUs = " + skuPrefixes);
 
-        List<Integer> lengths = words.stream()
+        List<Integer> nameLengths = products.stream()
                 .map(String::length)
                 .collect(Collectors.toList());
-        System.out.println("lengths = " + lengths);
+        System.out.println("name lengths     = " + nameLengths);
 
-        List<String> ids = List.of("1", "2", "42", "100");
-        int sum = ids.stream()
+        List<String> orderQuantities = List.of("3", "12", "1", "7");
+        int totalUnits = orderQuantities.stream()
                 .map(Integer::parseInt)
                 .mapToInt(Integer::intValue)
                 .sum();
-        System.out.println("sum     = " + sum);
+        System.out.println("total units sold = " + totalUnits);
     }
 }

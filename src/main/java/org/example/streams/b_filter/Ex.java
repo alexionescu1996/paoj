@@ -7,24 +7,24 @@ import java.util.stream.Collectors;
 public class Ex {
     public static void main(String[] args) {
 
-        List<Integer> numbers = List.of(-3, -1, 0, 2, 5, 8, 13);
+        List<Double> transactions = List.of(-50.0, -12.5, 0.0, 25.0, 100.0, 250.0, 980.0);
 
-        List<Integer> positives = numbers.stream()
-                .filter(n -> n > 0)
+        List<Double> credits = transactions.stream()
+                .filter(amount -> amount > 0)
                 .collect(Collectors.toList());
-        System.out.println("positives = " + positives);
+        System.out.println("credits         = " + credits);
 
-        Predicate<Integer> isEven = n -> n % 2 == 0;
-        List<Integer> positiveEvens = numbers.stream()
-                .filter(n -> n > 0)
-                .filter(isEven)
+        Predicate<Double> isLarge = amount -> amount >= 100;
+        List<Double> largeCredits = transactions.stream()
+                .filter(amount -> amount > 0)
+                .filter(isLarge)
                 .collect(Collectors.toList());
-        System.out.println("positive evens = " + positiveEvens);
+        System.out.println("large credits   = " + largeCredits);
 
-        List<String> words = List.of("apple", "fig", "banana", "kiwi", "pear");
-        long longCount = words.stream()
-                .filter(w -> w.length() > 4)
+        List<String> products = List.of("Mug", "Headphones", "Pen", "Keyboard", "USB-C Hub");
+        long longNames = products.stream()
+                .filter(name -> name.length() > 5)
                 .count();
-        System.out.println("words longer than 4 = " + longCount);
+        System.out.println("products with name longer than 5 chars = " + longNames);
     }
 }
