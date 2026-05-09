@@ -5,18 +5,20 @@ import java.util.TreeMap;
 public class Ex {
     public static void main(String[] args) {
 
-        TreeMap<String, Integer> scores = new TreeMap<>();
+        TreeMap<String, String> catalog = new TreeMap<>();
 
-        scores.put("charlie", 70);
-        scores.put("alice", 95);
-        scores.put("bob", 80);
+        catalog.put("978-0-13-468599-1", "Effective Java");
+        catalog.put("978-0-321-35668-0", "Java Concurrency in Practice");
+        catalog.put("978-0-13-235088-4", "Clean Code");
+        catalog.put("978-0-201-63361-0", "Design Patterns");
 
-        System.out.println("sorted by key = " + scores);
+        System.out.println("catalog (sorted by ISBN):");
+        catalog.forEach((isbn, title) -> System.out.println("  " + isbn + " -> " + title));
 
-        System.out.println("firstKey = " + scores.firstKey());
-        System.out.println("lastKey  = " + scores.lastKey());
-        System.out.println("headMap(bob) = " + scores.headMap("bob"));
-        System.out.println("tailMap(bob) = " + scores.tailMap("bob"));
-        System.out.println("ceilingKey(b) = " + scores.ceilingKey("b"));
+        System.out.println("\nfirst ISBN  = " + catalog.firstKey());
+        System.out.println("last ISBN   = " + catalog.lastKey());
+        System.out.println("headMap(978-0-2...) = " + catalog.headMap("978-0-2"));
+        System.out.println("tailMap(978-0-2...) = " + catalog.tailMap("978-0-2"));
+        System.out.println("ceilingKey(978-0-15) = " + catalog.ceilingKey("978-0-15"));
     }
 }

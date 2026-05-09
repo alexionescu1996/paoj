@@ -5,26 +5,26 @@ import java.util.LinkedList;
 public class Ex {
     public static void main(String[] args) {
 
-        LinkedList<String> queue = new LinkedList<>();
+        LinkedList<String> printQueue = new LinkedList<>();
 
-        queue.add("first");
-        queue.add("second");
-        queue.add("third");
+        printQueue.add("report.pdf");
+        printQueue.add("invoice.pdf");
+        printQueue.add("contract.pdf");
 
-        queue.addFirst("zero");
-        queue.addLast("fourth");
-        System.out.println("queue = " + queue);
+        printQueue.addFirst("URGENT-payslip.pdf");
+        printQueue.addLast("newsletter.pdf");
+        System.out.println("print queue = " + printQueue);
 
-        System.out.println("getFirst = " + queue.getFirst());
-        System.out.println("getLast  = " + queue.getLast());
+        System.out.println("next to print  = " + printQueue.getFirst());
+        System.out.println("last in queue  = " + printQueue.getLast());
 
-        queue.removeFirst();
-        queue.removeLast();
-        System.out.println("after removeFirst/removeLast = " + queue);
+        printQueue.removeFirst();
+        printQueue.removeLast();
+        System.out.println("after printing first + cancelling last = " + printQueue);
 
-        queue.push("pushed");
-        System.out.println("after push  = " + queue);
-        System.out.println("pop         = " + queue.pop());
-        System.out.println("after pop   = " + queue);
+        printQueue.push("HOTFIX-banner.pdf");
+        System.out.println("after pushing hotfix = " + printQueue);
+        System.out.println("pop (handle next)    = " + printQueue.pop());
+        System.out.println("after pop            = " + printQueue);
     }
 }

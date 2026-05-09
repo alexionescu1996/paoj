@@ -6,19 +6,19 @@ import java.util.Set;
 public class Ex {
     public static void main(String[] args) {
 
-        Set<String> tags = new HashSet<>();
+        Set<String> recipients = new HashSet<>();
 
-        tags.add("java");
-        tags.add("collections");
-        tags.add("java");
-        tags.add("oop");
-        tags.add("oop");
+        recipients.add("alice@example.com");
+        recipients.add("bob@example.com");
+        recipients.add("alice@example.com");
+        recipients.add("carol@example.com");
+        recipients.add("bob@example.com");
 
-        System.out.println("tags     = " + tags);
-        System.out.println("size     = " + tags.size());
-        System.out.println("contains = " + tags.contains("java"));
+        System.out.println("recipients (deduped) = " + recipients);
+        System.out.println("unique count         = " + recipients.size());
+        System.out.println("contains bob         = " + recipients.contains("bob@example.com"));
 
-        tags.remove("oop");
-        System.out.println("after remove = " + tags);
+        recipients.remove("carol@example.com");
+        System.out.println("after unsubscribe    = " + recipients);
     }
 }

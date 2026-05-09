@@ -6,14 +6,15 @@ import java.util.Set;
 public class Ex {
     public static void main(String[] args) {
 
-        Set<String> ordered = new LinkedHashSet<>();
+        Set<String> recentlyViewed = new LinkedHashSet<>();
 
-        ordered.add("c");
-        ordered.add("a");
-        ordered.add("b");
-        ordered.add("a");
+        recentlyViewed.add("Headphones");
+        recentlyViewed.add("Mug");
+        recentlyViewed.add("Keyboard");
+        recentlyViewed.add("Headphones");
+        recentlyViewed.add("Speaker");
 
-        System.out.println("LinkedHashSet keeps insertion order:");
-        System.out.println(ordered);
+        System.out.println("recently viewed (insertion order, no duplicates):");
+        System.out.println(recentlyViewed);
     }
 }

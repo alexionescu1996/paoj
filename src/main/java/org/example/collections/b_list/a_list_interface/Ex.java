@@ -6,24 +6,24 @@ import java.util.List;
 public class Ex {
     public static void main(String[] args) {
 
-        List<String> list = new ArrayList<>();
-        list.add("a");
-        list.add("b");
-        list.add("c");
+        List<String> playlist = new ArrayList<>();
+        playlist.add("Bohemian Rhapsody");
+        playlist.add("Imagine");
+        playlist.add("Hey Jude");
 
-        System.out.println("get(0)        = " + list.get(0));
-        System.out.println("indexOf('b')  = " + list.indexOf("b"));
+        System.out.println("track 0          = " + playlist.get(0));
+        System.out.println("indexOf(Imagine) = " + playlist.indexOf("Imagine"));
 
-        list.set(1, "B");
-        System.out.println("after set(1)  = " + list);
+        playlist.set(1, "Let It Be");
+        System.out.println("after replace track 1 = " + playlist);
 
-        list.add(1, "x");
-        System.out.println("after add(1)  = " + list);
+        playlist.add(1, "Yesterday");
+        System.out.println("after insert at 1     = " + playlist);
 
-        list.remove(0);
-        System.out.println("after remove(0) = " + list);
+        playlist.remove(0);
+        System.out.println("after remove track 0  = " + playlist);
 
-        List<String> sub = list.subList(0, 2);
-        System.out.println("subList(0,2)  = " + sub);
+        List<String> firstTwo = playlist.subList(0, 2);
+        System.out.println("first two tracks      = " + firstTwo);
     }
 }

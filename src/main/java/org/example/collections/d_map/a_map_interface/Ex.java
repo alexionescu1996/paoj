@@ -6,32 +6,32 @@ import java.util.Map;
 public class Ex {
     public static void main(String[] args) {
 
-        Map<String, Integer> ages = new HashMap<>();
+        Map<String, Integer> grades = new HashMap<>();
 
-        ages.put("Alice", 30);
-        ages.put("Bob", 25);
-        ages.put("Carol", 28);
+        grades.put("Alice", 92);
+        grades.put("Bob", 78);
+        grades.put("Carol", 65);
 
-        System.out.println("get(Alice)       = " + ages.get("Alice"));
-        System.out.println("containsKey(Bob) = " + ages.containsKey("Bob"));
-        System.out.println("size             = " + ages.size());
+        System.out.println("Alice's grade   = " + grades.get("Alice"));
+        System.out.println("Bob enrolled?   = " + grades.containsKey("Bob"));
+        System.out.println("class size      = " + grades.size());
 
-        System.out.println("\nkeySet:");
-        for (String key : ages.keySet()) {
-            System.out.println("  " + key);
+        System.out.println("\nstudents (keySet):");
+        for (String name : grades.keySet()) {
+            System.out.println("  " + name);
         }
 
-        System.out.println("\nvalues:");
-        for (Integer value : ages.values()) {
-            System.out.println("  " + value);
+        System.out.println("\ngrades (values):");
+        for (Integer grade : grades.values()) {
+            System.out.println("  " + grade);
         }
 
-        System.out.println("\nentrySet:");
-        for (Map.Entry<String, Integer> entry : ages.entrySet()) {
+        System.out.println("\ngrade book (entrySet):");
+        for (Map.Entry<String, Integer> entry : grades.entrySet()) {
             System.out.println("  " + entry.getKey() + " -> " + entry.getValue());
         }
 
-        ages.remove("Bob");
-        System.out.println("\nafter remove(Bob) = " + ages);
+        grades.remove("Bob");
+        System.out.println("\nafter Bob drops the class = " + grades);
     }
 }

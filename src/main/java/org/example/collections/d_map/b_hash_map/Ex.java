@@ -5,20 +5,20 @@ import java.util.HashMap;
 public class Ex {
     public static void main(String[] args) {
 
-        HashMap<String, Integer> wordCount = new HashMap<>();
+        HashMap<String, Integer> votes = new HashMap<>();
 
-        String[] words = {"apple", "banana", "apple", "cherry", "banana", "apple"};
+        String[] ballots = {"Alice", "Bob", "Alice", "Carol", "Bob", "Alice", "Bob"};
 
-        for (String word : words) {
-            wordCount.merge(word, 1, Integer::sum);
+        for (String candidate : ballots) {
+            votes.merge(candidate, 1, Integer::sum);
         }
 
-        System.out.println("word count = " + wordCount);
+        System.out.println("vote tally = " + votes);
 
-        wordCount.putIfAbsent("date", 0);
-        System.out.println("after putIfAbsent = " + wordCount);
+        votes.putIfAbsent("Dave", 0);
+        System.out.println("after registering Dave with 0 votes = " + votes);
 
-        Integer value = wordCount.getOrDefault("missing", -1);
-        System.out.println("getOrDefault(missing, -1) = " + value);
+        Integer eveVotes = votes.getOrDefault("Eve", 0);
+        System.out.println("votes for Eve (not on ballot) = " + eveVotes);
     }
 }

@@ -6,22 +6,23 @@ import java.util.TreeSet;
 public class Ex {
     public static void main(String[] args) {
 
-        TreeSet<Integer> sorted = new TreeSet<>();
-        sorted.add(50);
-        sorted.add(10);
-        sorted.add(30);
-        sorted.add(20);
+        TreeSet<Integer> leaderboard = new TreeSet<>();
+        leaderboard.add(2400);
+        leaderboard.add(1200);
+        leaderboard.add(1800);
+        leaderboard.add(950);
+        leaderboard.add(2100);
 
-        System.out.println("natural order = " + sorted);
-        System.out.println("first = " + sorted.first());
-        System.out.println("last  = " + sorted.last());
-        System.out.println("headSet(30) = " + sorted.headSet(30));
-        System.out.println("tailSet(30) = " + sorted.tailSet(30));
+        System.out.println("scores (natural order) = " + leaderboard);
+        System.out.println("lowest score  = " + leaderboard.first());
+        System.out.println("highest score = " + leaderboard.last());
+        System.out.println("scores below 1800 = " + leaderboard.headSet(1800));
+        System.out.println("scores >= 1800    = " + leaderboard.tailSet(1800));
 
-        TreeSet<String> reversed = new TreeSet<>(Comparator.reverseOrder());
-        reversed.add("apple");
-        reversed.add("banana");
-        reversed.add("cherry");
-        System.out.println("custom order  = " + reversed);
+        TreeSet<String> rankByName = new TreeSet<>(Comparator.reverseOrder());
+        rankByName.add("alice");
+        rankByName.add("bob");
+        rankByName.add("carol");
+        System.out.println("players reverse-alpha = " + rankByName);
     }
 }

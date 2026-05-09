@@ -5,22 +5,23 @@ import java.util.ArrayList;
 public class Ex {
     public static void main(String[] args) {
 
-        ArrayList<Integer> numbers = new ArrayList<>();
+        ArrayList<Integer> dailyTemps = new ArrayList<>();
 
-        for (int i = 1; i <= 5; i++) {
-            numbers.add(i * 10);
+        int[] readings = {12, 14, 11, 9, 13, 16, 15};
+        for (int t : readings) {
+            dailyTemps.add(t);
         }
 
-        System.out.println("numbers = " + numbers);
-        System.out.println("get(2)  = " + numbers.get(2));
+        System.out.println("week temps      = " + dailyTemps);
+        System.out.println("wednesday (idx 2) = " + dailyTemps.get(2) + "°C");
 
-        numbers.add(0, 999);
-        System.out.println("after insert at head = " + numbers);
+        dailyTemps.add(0, 10);
+        System.out.println("after prepend prior-sunday = " + dailyTemps);
 
-        numbers.remove(Integer.valueOf(30));
-        System.out.println("after remove value 30 = " + numbers);
+        dailyTemps.remove(Integer.valueOf(11));
+        System.out.println("after dropping reading 11°C = " + dailyTemps);
 
-        System.out.println("contains 50 = " + numbers.contains(50));
-        System.out.println("size        = " + numbers.size());
+        System.out.println("contains 16°C  = " + dailyTemps.contains(16));
+        System.out.println("number of days = " + dailyTemps.size());
     }
 }

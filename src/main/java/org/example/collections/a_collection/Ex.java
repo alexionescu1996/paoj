@@ -6,27 +6,27 @@ import java.util.Collection;
 public class Ex {
     public static void main(String[] args) {
 
-        Collection<String> heroes = new ArrayList<>();
+        Collection<String> cart = new ArrayList<>();
 
-        heroes.add("Superman");
-        heroes.add("Batman");
-        heroes.add("Wonder Woman");
+        cart.add("Headphones");
+        cart.add("Mug");
+        cart.add("Keyboard");
 
-        System.out.println("size      = " + heroes.size());
-        System.out.println("isEmpty   = " + heroes.isEmpty());
-        System.out.println("contains  = " + heroes.contains("Batman"));
+        System.out.println("size              = " + cart.size());
+        System.out.println("isEmpty           = " + cart.isEmpty());
+        System.out.println("contains Keyboard = " + cart.contains("Keyboard"));
 
-        heroes.remove("Batman");
-        System.out.println("after remove = " + heroes);
+        cart.remove("Mug");
+        System.out.println("after remove(Mug) = " + cart);
 
-        Collection<String> villains = new ArrayList<>();
-        villains.add("Joker");
-        villains.add("Thanos");
+        Collection<String> wishlist = new ArrayList<>();
+        wishlist.add("Speaker");
+        wishlist.add("USB-C Hub");
 
-        heroes.addAll(villains);
-        System.out.println("after addAll = " + heroes);
+        cart.addAll(wishlist);
+        System.out.println("after addAll(wishlist) = " + cart);
 
-        heroes.clear();
-        System.out.println("after clear  = " + heroes + ", size=" + heroes.size());
+        cart.clear();
+        System.out.println("after checkout / clear = " + cart + ", size=" + cart.size());
     }
 }
