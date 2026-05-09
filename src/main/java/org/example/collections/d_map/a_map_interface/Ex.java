@@ -6,6 +6,9 @@ import java.util.Map;
 public class Ex {
     public static void main(String[] args) {
 
+        // Map — key → value, NO duplicate keys (put overwrites)
+        // keySet / values / entrySet are VIEWS — modifying them affects the map
+
         Map<String, Integer> grades = new HashMap<>();
 
         grades.put("Alice", 92);

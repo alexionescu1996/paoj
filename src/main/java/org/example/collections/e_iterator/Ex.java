@@ -8,6 +8,11 @@ import java.util.List;
 public class Ex {
     public static void main(String[] args) {
 
+        // Iterator — hasNext() / next() / remove()
+        //   Iterator.remove() is the ONLY safe way to remove during iteration
+        //   Mutating the collection directly (list.remove) inside a for-each
+        //   throws ConcurrentModificationException (fail-fast)
+
         List<String> inbox = new ArrayList<>();
         inbox.add("Project update");
         inbox.add("[SPAM] you won a prize!");

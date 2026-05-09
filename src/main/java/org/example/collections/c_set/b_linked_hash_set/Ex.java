@@ -6,6 +6,9 @@ import java.util.Set;
 public class Ex {
     public static void main(String[] args) {
 
+        // LinkedHashSet — no duplicates, KEEPS INSERTION ORDER
+        //   same O(1) average ops as HashSet, slightly higher memory
+
         Set<String> recentlyViewed = new LinkedHashSet<>();
 
         recentlyViewed.add("Headphones");

@@ -5,6 +5,10 @@ import java.util.LinkedList;
 public class Ex {
     public static void main(String[] args) {
 
+        // LinkedList — doubly-linked, also implements Deque
+        //   addFirst/addLast/removeFirst/removeLast/push/pop: O(1)
+        //   get(i)/random access: O(n)
+
         LinkedList<String> printQueue = new LinkedList<>();
 
         printQueue.add("report.pdf");

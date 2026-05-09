@@ -5,6 +5,11 @@ import java.util.TreeMap;
 public class Ex {
     public static void main(String[] args) {
 
+        // TreeMap — keys SORTED (red-black tree)
+        //   get/put/remove: O(log n)
+        //   firstKey/lastKey/headMap/tailMap/ceilingKey navigate by order
+        //   keys must be Comparable OR construct with a Comparator
+
         TreeMap<String, String> catalog = new TreeMap<>();
 
         catalog.put("978-0-13-468599-1", "Effective Java");

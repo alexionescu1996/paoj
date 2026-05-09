@@ -6,6 +6,11 @@ import java.util.TreeSet;
 public class Ex {
     public static void main(String[] args) {
 
+        // TreeSet — no duplicates, SORTED (red-black tree)
+        //   add/contains/remove: O(log n)
+        //   needs Comparable elements OR a Comparator
+        //   headSet/tailSet/subSet return VIEWS (live, not copies)
+
         TreeSet<Integer> leaderboard = new TreeSet<>();
         leaderboard.add(2400);
         leaderboard.add(1200);

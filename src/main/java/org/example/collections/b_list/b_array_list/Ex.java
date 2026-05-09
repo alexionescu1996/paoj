@@ -5,6 +5,11 @@ import java.util.ArrayList;
 public class Ex {
     public static void main(String[] args) {
 
+        // ArrayList — backed by an array
+        //   get(i)/set(i): O(1)
+        //   add at end: amortized O(1)
+        //   add(0, v) / remove(v): O(n) — shifts elements
+
         ArrayList<Integer> dailyTemps = new ArrayList<>();
 
         int[] readings = {12, 14, 11, 9, 13, 16, 15};

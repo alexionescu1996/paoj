@@ -6,6 +6,9 @@ import java.util.List;
 public class Ex {
     public static void main(String[] args) {
 
+        // List — ordered, allows duplicates, indexed access via get(i)/set(i, v)
+        // subList returns a VIEW backed by the source list (not a copy)
+
         List<String> playlist = new ArrayList<>();
         playlist.add("Bohemian Rhapsody");
         playlist.add("Imagine");

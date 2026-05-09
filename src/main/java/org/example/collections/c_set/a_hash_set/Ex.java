@@ -6,6 +6,9 @@ import java.util.Set;
 public class Ex {
     public static void main(String[] args) {
 
+        // HashSet — no duplicates, NO ordering guarantees
+        //   add/contains/remove: O(1) average (depends on hashCode quality)
+
         Set<String> recipients = new HashSet<>();
 
         recipients.add("alice@example.com");

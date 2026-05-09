@@ -6,6 +6,8 @@ import java.util.Collection;
 public class Ex {
     public static void main(String[] args) {
 
+        // Collection — root interface for List, Set, Queue (single-element ops)
+
         Collection<String> cart = new ArrayList<>();
 
         cart.add("Headphones");
