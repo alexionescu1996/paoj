@@ -6,6 +6,11 @@ import java.util.stream.Stream;
 public class Ex {
     public static void main(String[] args) {
 
+        // Stream — sequence of values processed lazily
+        //   intermediate ops (filter, map, peek, sorted, ...) return a new Stream
+        //   terminal ops    (forEach, collect, count, min, ...) trigger the work
+        //   a stream is consumed ONCE — reuse throws IllegalStateException
+
         Stream<String> fromOf = Stream.of("Headphones", "Mug", "Keyboard");
         System.out.println("count from of   = " + fromOf.count());
 

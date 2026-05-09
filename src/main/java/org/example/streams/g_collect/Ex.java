@@ -7,6 +7,10 @@ import java.util.stream.Collectors;
 public class Ex {
     public static void main(String[] args) {
 
+        // collect(Collector) — terminal, accumulates elements into a result
+        // common collectors: toList, toSet, joining, counting, groupingBy, partitioningBy
+        // toSet drops duplicates (ordering NOT guaranteed)
+
         List<String> tags = List.of("electronics", "audio", "electronics", "wireless", "audio", "gift");
 
         List<String> normalised = tags.stream()

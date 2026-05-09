@@ -7,6 +7,12 @@ import java.util.List;
 public class Ex {
     public static void main(String[] args) {
 
+        // lambda syntax variants:
+        //   () -> ...           no args
+        //   x -> ...            one arg, parens optional
+        //   (a, b) -> expr      multiple args, single expression (implicit return)
+        //   (a, b) -> { ... }   block body, must use 'return' for non-void
+
         Runnable openStore = () -> System.out.println("store open: ready to serve customers");
         openStore.run();
 

@@ -5,6 +5,11 @@ import java.util.function.Function;
 public class Ex {
     public static void main(String[] args) {
 
+        // Function<T, R> — R apply(T); used by stream.map
+        // f.andThen(g): first f, then g       — g(f(x))
+        // f.compose(g): first g, then f       — f(g(x))
+        // Function.identity(): x -> x
+
         Function<String, Integer> wordCount = review -> review.trim().isEmpty()
                 ? 0
                 : review.trim().split("\\s+").length;

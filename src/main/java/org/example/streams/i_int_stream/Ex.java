@@ -6,6 +6,12 @@ import java.util.stream.IntStream;
 public class Ex {
     public static void main(String[] args) {
 
+        // IntStream — primitive int stream (no boxing)
+        //   sum() returns int
+        //   average() / max() / min() return OptionalDouble / OptionalInt
+        //   range(a, b)  -> a..b-1
+        //   rangeClosed(a, b) -> a..b inclusive
+
         int[] monthlySales = {1200, 1450, 980, 1700, 2050, 1340, 1620, 1810, 1530, 2200, 1900, 2400};
 
         int totalSales = IntStream.of(monthlySales).sum();

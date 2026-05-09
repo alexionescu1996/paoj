@@ -7,6 +7,9 @@ import java.util.Optional;
 public class Ex {
     public static void main(String[] args) {
 
+        // min / max — terminal, returns Optional<T>
+        // empty stream → Optional.empty(); orElseThrow / orElse handle that
+
         List<Integer> temperatures = List.of(7, 3, 11, -2, 9, 1, 14, -5);
 
         Optional<Integer> coldest = temperatures.stream().min(Comparator.naturalOrder());

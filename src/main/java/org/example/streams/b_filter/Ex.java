@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 public class Ex {
     public static void main(String[] args) {
 
+        // filter(Predicate) — intermediate op, keeps only matching elements
+        // chaining filters is fine: each adds a condition (logical AND)
+
         List<Double> transactions = List.of(-50.0, -12.5, 0.0, 25.0, 100.0, 250.0, 980.0);
 
         List<Double> credits = transactions.stream()

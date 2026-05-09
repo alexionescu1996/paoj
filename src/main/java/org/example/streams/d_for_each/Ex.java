@@ -5,6 +5,9 @@ import java.util.List;
 public class Ex {
     public static void main(String[] args) {
 
+        // forEach(Consumer) — terminal op for side effects
+        // order is NOT guaranteed on parallel streams; use forEachOrdered if needed
+
         List<String> subscribers = List.of(
                 "alice@example.com",
                 "bob@example.com",

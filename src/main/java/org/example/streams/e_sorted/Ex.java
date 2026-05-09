@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 public class Ex {
     public static void main(String[] args) {
 
+        // sorted() — needs Comparable elements (natural order)
+        // sorted(Comparator) — explicit ordering; .reversed() and .thenComparing() compose
+
         List<String> cities = List.of("Bucharest", "Paris", "London", "Tokyo", "Cluj-Napoca", "Rome");
 
         List<String> alphabetical = cities.stream()

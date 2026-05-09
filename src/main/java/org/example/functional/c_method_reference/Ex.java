@@ -13,6 +13,13 @@ public class Ex {
 
     public static void main(String[] args) {
 
+        // method reference — shorthand for a lambda that just calls one method
+        // 4 forms:
+        //   ClassName::staticMethod      e.g. Integer::parseInt
+        //   instance::method             e.g. prefix::concat       (bound)
+        //   ClassName::instanceMethod    e.g. String::length       (unbound)
+        //   ClassName::new               e.g. StringBuilder::new   (constructor)
+
         Function<String, Integer> parseLambda = s -> Integer.parseInt(s);
         Function<String, Integer> parseRef = Integer::parseInt;
         System.out.println("static ref Integer::parseInt('1042') = " + parseRef.apply("1042"));

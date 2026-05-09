@@ -6,6 +6,9 @@ import java.util.function.Supplier;
 public class Ex {
     public static void main(String[] args) {
 
+        // Supplier<T> — T get(); no input, produces a value lazily on each call
+        // useful for: defaults (Optional.orElseGet), factories, deferred work
+
         Supplier<String> welcomeBanner = () -> "=== Welcome to the Store ===";
         System.out.println(welcomeBanner.get());
 

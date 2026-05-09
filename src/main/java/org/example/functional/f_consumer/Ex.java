@@ -6,6 +6,9 @@ import java.util.function.Consumer;
 public class Ex {
     public static void main(String[] args) {
 
+        // Consumer<T> — void accept(T); used by forEach
+        // andThen chains side effects: a.andThen(b) runs a, then b, on the same input
+
         Consumer<String> log = email -> System.out.println("[log] dispatching to " + email);
         Consumer<String> sendEmail = email -> System.out.println("    --> email sent to " + email);
 

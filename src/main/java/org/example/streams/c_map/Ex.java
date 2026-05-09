@@ -6,6 +6,10 @@ import java.util.stream.Collectors;
 public class Ex {
     public static void main(String[] args) {
 
+        // map(Function<T, R>) — intermediate, transforms each element 1:1
+        // mapToInt / mapToDouble / mapToLong — go to a primitive stream
+        //   (avoids boxing and unlocks sum / average / max / min)
+
         List<String> products = List.of("Headphones", "Mug", "Keyboard");
 
         List<String> skuPrefixes = products.stream()

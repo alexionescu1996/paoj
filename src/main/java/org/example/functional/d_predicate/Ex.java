@@ -7,6 +7,9 @@ import java.util.function.Predicate;
 public class Ex {
     public static void main(String[] args) {
 
+        // Predicate<T> — boolean test(T); used by filter / removeIf
+        // and / or / negate return NEW predicates (immutable composition)
+
         Predicate<Integer> isPassing = score -> score >= 50;
         Predicate<Integer> isHonors = score -> score >= 80;
 

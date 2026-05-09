@@ -10,6 +10,11 @@ public class Ex {
 
     public static void main(String[] args) {
 
+        // flatMap(T -> Stream<R>) — flattens nested structures
+        //   map  produces Stream<Stream<R>>     ← one element per input
+        //   flatMap produces Stream<R>          ← merges them into one stream
+        // typical use: List<List<X>> -> List<X>, sentence -> words, etc.
+
         List<Order> orders = List.of(
                 new Order("ORD-1001", List.of("Headphones", "USB-C Hub")),
                 new Order("ORD-1002", List.of("Mug")),

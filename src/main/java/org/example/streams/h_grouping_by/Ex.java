@@ -10,6 +10,10 @@ public class Ex {
 
     public static void main(String[] args) {
 
+        // groupingBy(classifier)            -> Map<K, List<T>>
+        // groupingBy(classifier, downstream)-> Map<K, R>   (e.g. counting, averagingDouble)
+        // partitioningBy(Predicate)         -> Map<Boolean, List<T>>  (only true/false keys)
+
         List<Product> catalog = List.of(
                 new Product("Headphones", "electronics", 79.0),
                 new Product("Mug", "kitchen", 8.5),

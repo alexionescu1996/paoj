@@ -3,6 +3,7 @@ package org.example.functional.a_functional_interface;
 public class Ex {
     public static void main(String[] args) {
 
+        // anonymous class — verbose
         Discount blackFriday = new Discount() {
             @Override
             public double apply(double price) {
@@ -10,6 +11,7 @@ public class Ex {
             }
         };
 
+        // lambda — same thing, one line (compiler infers the SAM)
         Discount studentDiscount = price -> price * 0.85;
         Discount loyaltyDiscount = price -> price - 10;
 
