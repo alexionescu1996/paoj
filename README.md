@@ -25,14 +25,10 @@ on its own.
    psql -d paoj_jdbc -f src/main/resources/schema.sql
    ```
 
-2. (Optional) Override connection settings via environment variables; defaults
-   live in `org.example.jdbc.A_Setup.DbConfig`:
-
-   ```bash
-   export PAOJ_DB_URL=jdbc:postgresql://localhost:5432/paoj_jdbc
-   export PAOJ_DB_USER=postgres
-   export PAOJ_DB_PASSWORD=postgres
-   ```
+2. Adjust the connection settings in
+   `org.example.jdbc.A_Setup.DbConfig` if your local Postgres differs from
+   the defaults (`jdbc:postgresql://localhost:5432/paoj_jdbc`,
+   `postgres`/`postgres`).
 
 3. Build and run any example, for example:
 
