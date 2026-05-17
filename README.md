@@ -16,6 +16,39 @@ on its own.
 | F     | `jdbc.F_Joins`                       | INNER JOIN transcript, LEFT JOIN + GROUP BY headcount  |
 | G     | `jdbc.G_CallableStatement`           | Calling a stored procedure with an OUT parameter       |
 
+## The PostgreSQL driver in `pom.xml`
+
+JDBC is part of the JDK (`java.sql.*`), but the JDK does **not** ship a
+driver for any specific database. To talk to PostgreSQL we add exactly
+one dependency in `pom.xml`:
+
+```xml
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.7.4</version>
+</dependency>
+```
+
+What happens when you build/run:
+
+1. Maven resolves the coordinates `org.postgresql:postgresql:42.7.4` from
+   Maven Central and caches the jar under `~/.m2/repository`.
+2. The jar is placed on the compile and runtime classpath.
+3. Inside that jar there is a file
+   `META-INF/services/java.sql.Driver` listing `org.postgresql.Driver`.
+   From JDBC 4.0 onwards `DriverManager` uses `ServiceLoader` to find
+   every such file on the classpath and auto-registers the drivers.
+4. When we call
+   `DriverManager.getConnection("jdbc:postgresql://...")`, the manager
+   asks each registered driver "do you handle this URL?"; the Postgres
+   driver answers yes and opens the connection.
+
+That is why package `A_Setup` works **without** `Class.forName("org.postgresql.Driver")`.
+The call is kept there only to make the registration step visible.
+
+This is plain Java + Maven — no Spring, no JPA, no extra framework.
+
 ## Setup
 
 1. Install PostgreSQL and create the database:

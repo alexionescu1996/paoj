@@ -14,6 +14,18 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <!--
+        Singura dependinta de care avem nevoie pentru exemplele JDBC: driverul
+        oficial PostgreSQL. Maven il descarca din Maven Central in ~/.m2 si il
+        pune pe classpath la compile + runtime. La pornire, JDBC 4.0+ il
+        gaseste automat prin ServiceLoader (META-INF/services/java.sql.Driver
+        din interiorul jar-ului) si il inregistreaza la DriverManager, deci
+        DriverManager.getConnection("jdbc:postgresql://...") stie ce driver
+        sa foloseasca fara Class.forName.
+
+        Coordonate (groupId:artifactId:version) pe Maven Central:
+            https://central.sonatype.com/artifact/org.postgresql/postgresql
+    -->
     <dependencies>
         <dependency>
             <groupId>org.postgresql</groupId>
