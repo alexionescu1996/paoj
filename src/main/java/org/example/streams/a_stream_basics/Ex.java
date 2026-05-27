@@ -1,30 +1,17 @@
 package org.example.streams.a_stream_basics;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 public class Ex {
     public static void main(String[] args) {
 
-        // Stream — sequence of values processed lazily
-        //   intermediate ops (filter, map, peek, sorted, ...) return a new Stream
-        //   terminal ops    (forEach, collect, count, min, ...) trigger the work
-        //   a stream is consumed ONCE — reuse throws IllegalStateException
+        // source -> intermediate ops (lazy) -> terminal op (runs the pipeline)
+        List<String> products = List.of("Headphones", "Mug", "Keyboard");
 
-        Stream<String> fromOf = Stream.of("Headphones", "Mug", "Keyboard");
-        System.out.println("count from of   = " + fromOf.count());
+        long count = products.stream()
+                .filter(p -> p.length() > 3)
+                .count();
 
-        List<String> products = List.of("Headphones", "Mug", "Keyboard", "Pen");
-        long fromList = products.stream().count();
-        System.out.println("count from list = " + fromList);
-
-        System.out.println("\n--- intermediate ops are lazy ---");
-        Stream<String> pipeline = products.stream()
-                .peek(p -> System.out.println("peek 1: " + p))
-                .peek(p -> System.out.println("peek 2: " + p));
-
-        System.out.println("(nothing printed yet — no terminal op)\n");
-
-        pipeline.forEach(p -> System.out.println("forEach: " + p));
+        System.out.println("count = " + count);
     }
 }

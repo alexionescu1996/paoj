@@ -7,27 +7,13 @@ import java.util.stream.Collectors;
 public class Ex {
     public static void main(String[] args) {
 
-        // collect(Collector) — terminal, accumulates elements into a result
-        // common collectors: toList, toSet, joining, counting, groupingBy, partitioningBy
-        // toSet drops duplicates (ordering NOT guaranteed)
+        // collect: terminal op that accumulates into a result
+        List<String> tags = List.of("audio", "electronics", "audio", "gift");
 
-        List<String> tags = List.of("electronics", "audio", "electronics", "wireless", "audio", "gift");
+        Set<String> unique = tags.stream().collect(Collectors.toSet());
+        String joined = tags.stream().collect(Collectors.joining(", "));
 
-        List<String> normalised = tags.stream()
-                .map(String::toUpperCase)
-                .collect(Collectors.toList());
-        System.out.println("toList   = " + normalised);
-
-        Set<String> uniqueTags = tags.stream()
-                .collect(Collectors.toSet());
-        System.out.println("toSet    = " + uniqueTags);
-
-        String csv = tags.stream()
-                .distinct()
-                .collect(Collectors.joining(", ", "[", "]"));
-        System.out.println("joining  = " + csv);
-
-        long count = tags.stream().collect(Collectors.counting());
-        System.out.println("counting = " + count);
+        System.out.println("unique = " + unique);
+        System.out.println("joined = " + joined);
     }
 }

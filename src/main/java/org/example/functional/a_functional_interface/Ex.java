@@ -3,22 +3,9 @@ package org.example.functional.a_functional_interface;
 public class Ex {
     public static void main(String[] args) {
 
-        // anonymous class — verbose
-        Discount blackFriday = new Discount() {
-            @Override
-            public double apply(double price) {
-                return price * 0.5;
-            }
-        };
+        // a lambda is a shorthand implementation of a SAM
+        Discount halfOff = price -> price * 0.5;
 
-        // lambda — same thing, one line (compiler infers the SAM)
-        Discount studentDiscount = price -> price * 0.85;
-        Discount loyaltyDiscount = price -> price - 10;
-
-        double cartTotal = 120.0;
-        System.out.println("original         = " + cartTotal);
-        System.out.println("black friday     = " + blackFriday.apply(cartTotal));
-        System.out.println("student discount = " + studentDiscount.apply(cartTotal));
-        System.out.println("loyalty discount = " + loyaltyDiscount.apply(cartTotal));
+        System.out.println("100 -> " + halfOff.apply(100));
     }
 }

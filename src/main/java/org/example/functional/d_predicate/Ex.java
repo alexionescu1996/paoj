@@ -7,25 +7,12 @@ import java.util.function.Predicate;
 public class Ex {
     public static void main(String[] args) {
 
-        // Predicate<T> — boolean test(T); used by filter / removeIf
-        // and / or / negate return NEW predicates (immutable composition)
-
+        // Predicate<T> = boolean test(T)
         Predicate<Integer> isPassing = score -> score >= 50;
-        Predicate<Integer> isHonors = score -> score >= 80;
 
-        System.out.println("isPassing.test(45) = " + isPassing.test(45));
-        System.out.println("isHonors.test(92)  = " + isHonors.test(92));
+        List<Integer> scores = new ArrayList<>(List.of(92, 45, 78, 33, 50));
+        scores.removeIf(isPassing.negate());
 
-        Predicate<Integer> passingButNotHonors = isPassing.and(isHonors.negate());
-        Predicate<Integer> passingOrHonors = isPassing.or(isHonors);
-        Predicate<Integer> failing = isPassing.negate();
-
-        System.out.println("passingButNotHonors(70) = " + passingButNotHonors.test(70));
-        System.out.println("passingOrHonors(40)     = " + passingOrHonors.test(40));
-        System.out.println("failing(30)             = " + failing.test(30));
-
-        List<Integer> classScores = new ArrayList<>(List.of(92, 45, 78, 33, 88, 50, 12, 65));
-        classScores.removeIf(failing);
-        System.out.println("scores after removing failing students = " + classScores);
+        System.out.println("passing scores = " + scores);
     }
 }

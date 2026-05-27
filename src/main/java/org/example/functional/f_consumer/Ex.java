@@ -6,23 +6,10 @@ import java.util.function.Consumer;
 public class Ex {
     public static void main(String[] args) {
 
-        // Consumer<T> — void accept(T); used by forEach
-        // andThen chains side effects: a.andThen(b) runs a, then b, on the same input
+        // Consumer<T> = void accept(T)
+        Consumer<String> notify = email -> System.out.println("sending to " + email);
 
-        Consumer<String> log = email -> System.out.println("[log] dispatching to " + email);
-        Consumer<String> sendEmail = email -> System.out.println("    --> email sent to " + email);
-
-        log.accept("alice@example.com");
-
-        Consumer<String> logThenSend = log.andThen(sendEmail);
-        logThenSend.accept("bob@example.com");
-
-        List<String> subscribers = List.of(
-                "alice@example.com",
-                "bob@example.com",
-                "carol@example.com"
-        );
-        System.out.println("\n--- newsletter dispatch ---");
-        subscribers.forEach(logThenSend);
+        List<String> subscribers = List.of("alice@example.com", "bob@example.com");
+        subscribers.forEach(notify);
     }
 }
