@@ -1,4 +1,4 @@
-package org.example.streams.h_grouping_by;
+package org.example.streams.g_grouping_by;
 
 import java.util.List;
 import java.util.Map;

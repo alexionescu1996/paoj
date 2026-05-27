@@ -1,4 +1,4 @@
-package org.example.streams.i_int_stream;
+package org.example.streams.h_int_stream;
 
 import java.util.stream.IntStream;
 

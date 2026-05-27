@@ -1,4 +1,4 @@
-package org.example.streams.j_flat_map;
+package org.example.streams.i_flat_map;
 
 import java.util.List;
 import java.util.stream.Collectors;

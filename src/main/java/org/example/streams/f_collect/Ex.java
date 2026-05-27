@@ -1,4 +1,4 @@
-package org.example.streams.g_collect;
+package org.example.streams.f_collect;
 
 import java.util.List;
 import java.util.Set;
