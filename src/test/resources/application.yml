@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: notif-temporal-test
+  temporal:
+    start-workers: false

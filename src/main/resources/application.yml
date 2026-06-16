@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: notif-temporal
+  temporal:
+    connection:
+      target: 127.0.0.1:7233
+    namespace: default
+    workers:
+      - task-queue: notif-tq
+        name: notif-worker
+
+logging:
+  level:
+    com.example.notif: INFO
+    io.temporal: INFO
